@@ -14,7 +14,7 @@ export default function Navbar(props: RINavbar) {
 		>
 			<div className="flex h-full items-center justify-between">
 				<div>
-					<img src={ImageIndex.RcLogo} />
+					<img src={ImageIndex.RcLogo} /> 
 				</div>
 
 				<div className="flex justify-between" style={{ width: "30%" }}>
