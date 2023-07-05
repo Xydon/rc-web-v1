@@ -14,17 +14,17 @@ export default function Navbar(props: RINavbar) {
 		>
 			<div className="flex h-full items-center justify-between">
 				<div>
-					<img src={ImageIndex.RcLogo} /> 
+					<img src={ImageIndex.RcLogo} />
 				</div>
 
-				<div className="flex justify-between" style={{ width: "30%" }}>
-					<div className="cursor-pointer hover:font-medium">
+				<div className="flex justify-between px-3">
+					<div className="cursor-pointer p-1 rounded-sm">
 						<p className="text-small text-slate-700">knowledge Drive</p>
 					</div>
-					<div className="cursor-pointer hover:font-medium">
+					<div className="cursor-pointer p-1">
 						<p className="text-small text-slate-700">about us</p>
 					</div>
-					<div className="cursor-pointer hover:font-medium">
+					<div className="cursor-pointer p-1">
 						<p className="text-small text-slate-700">research interns</p>
 					</div>
 				</div>
