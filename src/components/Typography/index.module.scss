@@ -1,0 +1,64 @@
+.h1 {
+	font-family: Inter;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 130%; /* 41.6px */
+	@media (min-width: 768px) {
+		font-size: 36px;
+	}
+	@media (min-width: 1280px) {
+		font-size: 48px;
+	}
+}
+
+.h2 {
+	/* Mobile/h2 */
+	font-family: Inter;
+	font-size: 24px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 130%; /* 31.2px */
+	@media (min-width: 768px) {
+		font-size: 24px;
+	}
+	@media (min-width: 1280px) {
+		font-size: 32px;
+	}
+}
+
+.h3 {
+	/* Mobile/h3 */
+	font-family: Inter;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 130%; /* 26px */
+	@media (min-width: 1280px) {
+		font-size: 24px;
+	}
+}
+
+.bodyLarge {
+	font-family: Inter;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%; /* 32px */
+}
+
+.body {
+	font-family: Inter;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%; /* 25.6px */
+}
+
+.bodyemphasis  {
+	font-family: Inter;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 160%; /* 28.8px */
+}

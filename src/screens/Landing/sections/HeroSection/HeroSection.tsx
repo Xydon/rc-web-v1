@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import style from "./HeroSection.module.css";
 import RotateAndScale from "@src/components/Interaction/RotateAndScale/RotateAndScale";
+import AssetIndex, { ImageIndex } from "@src/assets/AssetIndex";
 
 export interface RIHeroSection {}
 
@@ -60,6 +61,24 @@ export default function HeroSection(props: RIHeroSection) {
 					</div>
 				</div>
 			</ResponsiveContainer>
+			<div
+				style={{
+					position: "absolute",
+					maxHeight: "80vh",
+					overflow: "hidden",
+					right: 0,
+					top: "0vw",
+				}}
+			>
+				<img
+					src={ImageIndex.HeroMicroScopeImage}
+					alt=""
+					style={{ width: "40vw", transform: "translateY(-10%)" }}
+				/>
+			</div>
+			<div style={{ position: "absolute", left: 0, top: "111px" }}>
+				<AssetIndex.RectangleLeft />
+			</div>
 		</div>
 	);
 }

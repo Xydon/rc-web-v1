@@ -51,7 +51,13 @@ export default function DropDown(props: RIDropDown) {
 				<p className="text-small font-medium text-slate-700">{text}</p>
 				{showDD && (
 					<div
-						style={{ position: "absolute", top: "90%", paddingTop: 8, left: 0 }}
+						style={{
+							position: "absolute",
+							top: "90%",
+							paddingTop: 8,
+							left: 0,
+							zIndex: 1000000,
+						}}
 					>
 						{props.DropDownNode}
 					</div>
