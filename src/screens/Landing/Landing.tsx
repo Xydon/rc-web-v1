@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Landing.module.css";
 import Navbar from "@src/components/Navbar/Navbar";
+import HeroSection from "./sections/HeroSection/HeroSection";
 
 export interface RILanding {}
 
@@ -11,6 +12,9 @@ export default function Landing(props: RILanding) {
 		<div className={style.container}>
 			<div>
 				<Navbar />
+			</div>
+			<div>
+				<HeroSection />
 			</div>
 		</div>
 	);

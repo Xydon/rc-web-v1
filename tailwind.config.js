@@ -8,6 +8,7 @@ module.exports = {
 		extend: {
 			colors: {
 				rcBlue: "#4D7FED",
+				rcBluePrimary: "#3C79FF",
 			},
 			fontFamily: {
 				sans: "Inter, sans-serif",
