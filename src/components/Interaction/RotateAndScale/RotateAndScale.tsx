@@ -13,11 +13,13 @@ interface Props {
 		onClick?: () => void;
 	};
 	children?: React.ReactNode;
+	style?: React.CSSProperties;
 }
 
 export default function RotateAndScale({
 	config = { scale: 1.1, rotate: 360 },
 	children,
+	style,
 }: Props) {
 	const { scale, rotate } = config;
 	return (
@@ -26,6 +28,7 @@ export default function RotateAndScale({
 			whileTap={{ scale: abs(1 - abs((scale as number) - 1)) }}
 			className="cursor-pointer w-fit"
 			onClick={config.onClick}
+			style={style}
 		>
 			{children}
 		</motion.div>

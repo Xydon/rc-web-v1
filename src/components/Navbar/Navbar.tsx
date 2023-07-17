@@ -5,6 +5,7 @@ import DropDown from "./components/DropDown/DropDown";
 import { ListGroup } from "flowbite-react";
 import { motion } from "framer-motion";
 import { Card } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export interface RINavbar {}
 
@@ -137,12 +138,14 @@ export default function Navbar(props: RINavbar) {
 							</button>
 						</div>
 						<div>
-							<button
-								style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
-								className=" text-slate-800 border border-slate-300 font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
-							>
-								Login
-							</button>
+							<Link to={"/login"}>
+								<button
+									style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
+									className=" text-slate-800 border border-slate-300 font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
+								>
+									Login
+								</button>
+							</Link>
 						</div>
 					</div>
 				</div>
