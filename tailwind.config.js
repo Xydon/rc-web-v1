@@ -13,6 +13,13 @@ module.exports = {
 			fontFamily: {
 				sans: "Inter, sans-serif",
 			},
+			spacing: {
+				"sys-9": 9,
+				"sys-15": 15,
+				"sys-24": 24,
+				"sys-39": 39,
+				"sys-63": 63,
+			},
 		},
 	},
 	plugins: [require("flowbite/plugin")],
