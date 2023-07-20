@@ -13,6 +13,7 @@ export default function CardList(props: RICardList) {
 		<div
 			className="lg:p-[22px] p-4 items-center rounded-md bg-slate-50 flex shadow border \
 		 border-slate-100 cursor-pointer hover:shadow-md hover:border-slate-200 transition-all"
+			style={{ maxWidth: 450 }}
 		>
 			<div className="mr-3">
 				<AssetIndex.Check />

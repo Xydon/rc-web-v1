@@ -130,12 +130,14 @@ export default function Navbar(props: RINavbar) {
 
 					<div className="flex">
 						<div className="mr-3">
-							<button
-								style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
-								className="bg-rcBlue text-white font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
-							>
-								Sign up
-							</button>
+							<Link to={"/signup"}>
+								<button
+									style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
+									className="bg-rcBlue text-white font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
+								>
+									Sign up
+								</button>
+							</Link>
 						</div>
 						<div>
 							<Link to={"/login"}>
