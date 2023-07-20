@@ -56,7 +56,9 @@ export default function Navbar(props: RINavbar) {
 										<ListGroup>
 											<ListGroup.Item>All Articles</ListGroup.Item>
 											<ListGroup.Item>My Articles</ListGroup.Item>
-											<ListGroup.Item>Create Article</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/article/fresh"}>Create Article</Link>
+											</ListGroup.Item>
 											<ListGroup.Item>Verification List</ListGroup.Item>
 										</ListGroup>
 									</motion.div>
