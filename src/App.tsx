@@ -6,6 +6,7 @@ import Landing from "./screens/Landing/Landing";
 import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import CreateArticlePageGroup from "./screens/CreateArticlePageGroup/CreateArticlePageGroup";
+import ArticleReviewList from "./screens/ArticleReviewList/ArticleReviewList";
 
 function App() {
 	return (
@@ -16,6 +17,10 @@ function App() {
 			<Route
 				path="/article/fresh"
 				element={<CreateArticlePageGroup.CreateFresh />}
+			/>
+			<Route
+				path="/article/reviewList"
+				element={<ArticleReviewList />}
 			/>
 		</Routes>
 	);
