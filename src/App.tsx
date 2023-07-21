@@ -7,6 +7,7 @@ import Login from "./screens/Login/Login";
 import Signup from "./screens/Signup/Signup";
 import CreateArticlePageGroup from "./screens/CreateArticlePageGroup/CreateArticlePageGroup";
 import ArticleReviewList from "./screens/ArticleReviewList/ArticleReviewList";
+import MyArticles from "./screens/MyArticles/MyArticles";
 
 function App() {
 	return (
@@ -18,10 +19,8 @@ function App() {
 				path="/article/fresh"
 				element={<CreateArticlePageGroup.CreateFresh />}
 			/>
-			<Route
-				path="/article/reviewList"
-				element={<ArticleReviewList />}
-			/>
+			<Route path="/article/reviewList" element={<ArticleReviewList />} />
+			<Route path="/article/myArticles" element={<MyArticles />} />
 		</Routes>
 	);
 }

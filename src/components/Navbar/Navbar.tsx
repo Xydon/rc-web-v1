@@ -39,9 +39,11 @@ export default function Navbar(props: RINavbar) {
 				}}
 			>
 				<div className="flex h-full items-center justify-between">
-					<div>
-						<img src={ImageIndex.RcLogo} />
-					</div>
+					<Link to="/">
+						<div>
+							<img src={ImageIndex.RcLogo} />
+						</div>
+					</Link>
 
 					<div className="hidden xl:flex justify-between px-3">
 						<div className="cursor-pointer px-3 rounded-sm">
@@ -55,7 +57,9 @@ export default function Navbar(props: RINavbar) {
 									>
 										<ListGroup>
 											<ListGroup.Item>All Articles</ListGroup.Item>
-											<ListGroup.Item>My Articles</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/article/myArticles"}>My Articles</Link>
+											</ListGroup.Item>
 											<ListGroup.Item>
 												<Link to={"/article/fresh"}>Create Article</Link>
 											</ListGroup.Item>
