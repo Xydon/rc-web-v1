@@ -8,6 +8,7 @@ import Signup from "./screens/Signup/Signup";
 import CreateArticlePageGroup from "./screens/CreateArticlePageGroup/CreateArticlePageGroup";
 import ArticleReviewList from "./screens/ArticleReviewList/ArticleReviewList";
 import MyArticles from "./screens/MyArticles/MyArticles";
+import CreatePost from "./screens/CreatePost/CreatePost";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 			/>
 			<Route path="/article/reviewList" element={<ArticleReviewList />} />
 			<Route path="/article/myArticles" element={<MyArticles />} />
+			<Route path="/post/create" element={<CreatePost />} />
 		</Routes>
 	);
 }

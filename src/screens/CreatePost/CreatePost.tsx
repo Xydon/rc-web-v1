@@ -6,12 +6,13 @@ import useHeight from "@src/modules/hooks/useHeight";
 import { Label, TextInput, Textarea } from "flowbite-react";
 import React from "react";
 
-export interface RICreateFresh {}
+export interface RICreatePost {}
 
-export namespace PICreateFresh {}
+export namespace PICreatePost {}
 
-export default function CreateFresh(props: RICreateFresh) {
+export default function CreatePost(props: RICreatePost) {
 	const heightHandle = useHeight();
+
 	return (
 		<div>
 			<div ref={heightHandle.ref}>
@@ -19,7 +20,7 @@ export default function CreateFresh(props: RICreateFresh) {
 			</div>
 			<div
 				style={{
-					minHeight: `calc( 100vh - ${heightHandle.height}px )`,
+					maxHeight: `calc( 100vh - ${heightHandle.height}px )`,
 					overflow: "auto",
 					paddingTop: 63,
 				}}
@@ -27,7 +28,7 @@ export default function CreateFresh(props: RICreateFresh) {
 				<ResponsiveContainer>
 					<div className="flex justify-between mb-sys-39">
 						<div>
-							<Typography.H2>Create Your Article</Typography.H2>
+							<Typography.H2>Create Post</Typography.H2>
 						</div>
 
 						<div className="flex">
@@ -48,45 +49,24 @@ export default function CreateFresh(props: RICreateFresh) {
 					<div className="w-1/2">
 						<div className="mb-sys-24">
 							<div className="mb-2 block">
-								<Label htmlFor="art-head" value="Article Heading" />
+								<Label htmlFor="post-head" value="Post Heading" />
 							</div>
 							<TextInput
-								id="art-head"
-								placeholder="The Cat is both dead and alive!"
+								id="post-head"
+								placeholder="My Awesome Post"
 								required
 								type="text"
 							/>
 						</div>
 						<div className="mb-sys-24">
 							<div className="mb-2 block">
-								<Label htmlFor="art-by-line" value="Enter Article ByLine" />
-							</div>
-							<TextInput
-								id="art-by-line"
-								placeholder="Learn how Schrodinger Equation explains the same."
-								required
-								type="text"
-							/>
-						</div>
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-body" value="Enter Article Body" />
+								<Label htmlFor="post-body" value="Enter Post Body" />
 							</div>
 							<Textarea
-								id="art-body"
+								id="post-body"
 								placeholder="An awesome journey begins here...."
 								required
 								rows={8}
-							/>
-						</div>
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-submit-note" value="Notes for reviewer" />
-							</div>
-							<Textarea
-								id="art-submit-note"
-								placeholder="Enter Note"
-								rows={4}
 							/>
 						</div>
 					</div>
