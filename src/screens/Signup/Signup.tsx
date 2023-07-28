@@ -1,10 +1,17 @@
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import useHeight from "@src/modules/hooks/useHeight";
 import { Label, TextInput } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import CardList from "../Login/components/CardList/CardList";
 import Typography from "@src/components/Typography";
 import Navbar from "@src/components/Navbar/Navbar";
+import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
+//@ts-ignore
+import FormActions from "./actions/FormActions";
+import { FieldDataService, Validators } from "@src/modules/FieldData/FieldData";
+import getFieldColor from "@src/modules/Utils/getFieldColor";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import getFieldMessage from "@src/modules/Utils/getFieldMessage";
 
 export interface RISignup {}
 
@@ -18,6 +25,20 @@ export default function Signup(props: RISignup) {
 		"Become a member of the community!",
 		"Get the latest news and notification",
 	];
+
+	const [state, setState] = useState<SignupScreen.State>({
+		userName: new FieldDataClass("", Validators.validateNull),
+		email: new FieldDataClass(
+			"",
+			FieldDataService.clubValidators(Validators.validateNull, Validators.email)
+		),
+		password: new FieldDataClass("", Validators.validateNull),
+		loading: {
+			checkEmail: AsyncStateFactory(),
+		},
+	});
+
+	const formActions = new FormActions(state, setState);
 
 	return (
 		<div>
@@ -58,47 +79,96 @@ export default function Signup(props: RISignup) {
 
 									<div className="mb-4">
 										<div className="mb-2 block">
-											<Label htmlFor="email1" value="Your user name" />
+											<Label
+												htmlFor="email1"
+												value="Your user name"
+												color={getFieldColor(state.userName)}
+											/>
 										</div>
 										<TextInput
 											id="input1"
 											placeholder="tony stark"
-											required
 											type="text"
+											helperText={<>{state.userName.getError()}</>}
+											color={getFieldColor(state.userName)}
+											onChange={(e) => {
+												formActions.setName(e.target.value);
+											}}
+											onBlur={() => {
+												formActions.validateName();
+											}}
 										/>
 									</div>
 
 									<div className="mb-4">
 										<div className="mb-2 block">
-											<Label htmlFor="email1" value="Your email" />
+											<Label
+												htmlFor="email1"
+												value="Your email"
+												color={getFieldColor(state.email)}
+											/>
 										</div>
 										<TextInput
 											id="input2"
 											placeholder="name@itbhu.ac.in"
-											required
 											type="email"
+											helperText={
+												<>
+													{getFieldMessage(state.email, {
+														loadingState: state.loading.checkEmail,
+														messageConfig: {
+															onInitializedMessage: "checking email",
+															onSuccessMessage: "email valid",
+														},
+													})}
+												</>
+											}
+											color={getFieldColor(
+												state.email,
+												state.loading.checkEmail
+											)}
+											onChange={(e) => {
+												formActions.setEmail(e.target.value);
+											}}
+											onBlur={() => {
+												formActions.validateEmail();
+											}}
 										/>
 									</div>
 
 									<div className="mb-7">
 										<div className="mb-2 block">
-											<Label htmlFor="password" value="Your password" />
+											<Label
+												htmlFor="password"
+												value="Your password"
+												color={getFieldColor(state.password)}
+											/>
 										</div>
 										<TextInput
 											id="inpu3"
 											placeholder="enter your password"
-											required
+											color={getFieldColor(state.password)}
 											type="password"
+											helperText={<>{state.password.getError()}</>}
+											onChange={(e) => {
+												formActions.setPassword(e.target.value);
+											}}
+											onBlur={() => {
+												formActions.validatePassword();
+											}}
 										/>
 									</div>
 
 									<button
 										style={{ padding: "11px 0", width: "100%" }}
 										className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
-										type="submit"
+										type="button"
+										onClick={() => {
+											formActions.validateAll();
+										}}
 									>
 										<Typography.Body className="text-white font-semibold">
-											Login
+											Signup
 										</Typography.Body>
 									</button>
 								</div>

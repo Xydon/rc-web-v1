@@ -9,3 +9,22 @@ interface AsyncStateFactory<T> {
 	message?: string;
 	meta?: T;
 }
+/**
+ * @warning - don't use it as the root level state
+ */
+interface AsyncStateClass<T = any> {
+	isLoading(): boolean;
+	isDormant(): boolean;
+	isInitialized(): boolean;
+	isSuccess(): boolean;
+	hasFailed(): boolean;
+	getMessage(): string;
+	getMeta(): T;
+	getStatus(): AsyncStatus;
+
+	setLoading();
+	setDormant();
+	setFailed();
+	setSuccess();
+	
+}

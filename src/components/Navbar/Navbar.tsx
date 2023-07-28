@@ -128,11 +128,13 @@ export default function Navbar(props: RINavbar) {
 									>
 										<ListGroup>
 											<ListGroup.Item>All Posts</ListGroup.Item>
-											<ListGroup.Item>Create Post</ListGroup.Item>
-											<Link to={"/post/create"}>
-												<ListGroup.Item>My Posts</ListGroup.Item>
-											</Link>
-											<ListGroup.Item>Review List</ListGroup.Item>
+											<ListGroup.Item>My Posts</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/post/create"}>Create Post</Link>
+											</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/post/reviewList"}>Review List</Link>
+											</ListGroup.Item>
 										</ListGroup>
 									</motion.div>
 								}
