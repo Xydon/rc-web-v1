@@ -27,4 +27,10 @@ export default class LoginActions extends StateUtils<LoginScreen.State> {
 		});
 		return passsword.validate();
 	}
+	validateAll() {
+		return [this.validateEmail(), this.validatePassword()].reduce(
+			(a, c) => a && c,
+			true
+		);
+	}
 }

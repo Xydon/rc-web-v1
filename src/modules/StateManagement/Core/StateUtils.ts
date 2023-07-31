@@ -85,3 +85,28 @@ export class ServerStateUtils<
 		});
 	}
 }
+
+export class FieldStateUtils<T> extends StateUtils<T> {
+	setField(
+		d: string,
+		getter: (p: T) => FieldDataClass,
+		setter: (p: T, field: FieldDataClass) => void
+	) {
+		this.mutateState((p) => {
+			const f = getter(p);
+			f.setValue(d);
+			setter(p, f);
+		});
+	}
+	validateField(
+		getter: (p: T) => FieldDataClass,
+		setter: (p: T, field: FieldDataClass) => void
+	) {
+		const field = getter(this.state);
+		field.validate();
+		this.mutateState((p) => {
+			setter(p, field);
+		});
+		return field.isVaild();
+	}
+}
