@@ -1,11 +1,14 @@
 export default function getFieldColor(
 	fieldData: FieldDataClass,
-	loadingState?: AsyncState
+	loadingState?: AsyncState,
+	disableValid?: boolean
 ) {
 	const syncColor = fieldData.hasError()
 		? "failure"
 		: fieldData.isVaild()
-		? "success"
+		? !disableValid
+			? "success"
+			: "gray"
 		: "gray";
 
 	if (loadingState) {
@@ -16,6 +19,7 @@ export default function getFieldColor(
 			loadingState.status === "success"
 		)
 			return syncColor;
-	}
-	return syncColor;
+
+		return syncColor;
+	} else return syncColor;
 }

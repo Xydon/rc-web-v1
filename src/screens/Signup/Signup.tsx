@@ -1,6 +1,6 @@
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import useHeight from "@src/modules/hooks/useHeight";
-import { Label, TextInput } from "flowbite-react";
+import { Label, Spinner, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import CardList from "../Login/components/CardList/CardList";
 import Typography from "@src/components/Typography";
@@ -12,6 +12,8 @@ import { FieldDataService, Validators } from "@src/modules/FieldData/FieldData";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import getFieldMessage from "@src/modules/Utils/getFieldMessage";
+import getCommonLoadingStatus from "@src/modules/Utils/getCommonLoadingStatus";
+import SignupActions from "./actions/SignupActions";
 
 export interface RISignup {}
 
@@ -35,10 +37,13 @@ export default function Signup(props: RISignup) {
 		password: new FieldDataClass("", Validators.validateNull),
 		loading: {
 			checkEmail: AsyncStateFactory(),
+			validateAll: AsyncStateFactory(),
+			createUser: AsyncStateFactory(),
 		},
 	});
 
 	const formActions = new FormActions(state, setState);
+	const signupActions = new SignupActions(state, setState);
 
 	return (
 		<div>
@@ -118,7 +123,6 @@ export default function Signup(props: RISignup) {
 														loadingState: state.loading.checkEmail,
 														messageConfig: {
 															onInitializedMessage: "checking email",
-															onSuccessMessage: "email valid",
 														},
 													})}
 												</>
@@ -164,11 +168,21 @@ export default function Signup(props: RISignup) {
 										className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
 										type="button"
 										onClick={() => {
-											formActions.validateAll();
+											formActions.validateAll().then((v) => {
+												console.log("verdict ", v);
+												if (v) signupActions.signup();
+											});
 										}}
 									>
 										<Typography.Body className="text-white font-semibold">
-											Signup
+											{!getCommonLoadingStatus(
+												state.loading.validateAll,
+												state.loading.createUser
+											) ? (
+												"Signup"
+											) : (
+												<Spinner />
+											)}
 										</Typography.Body>
 									</button>
 								</div>

@@ -23,8 +23,6 @@ export default function Navbar(props: RINavbar) {
 		return () => window.removeEventListener("scroll", handler);
 	}, []);
 
-	console.log(hasScrolled);
-
 	return (
 		<>
 			<div

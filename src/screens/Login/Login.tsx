@@ -2,16 +2,27 @@ import Navbar from "@src/components/Navbar/Navbar";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import useHeight from "@src/modules/hooks/useHeight";
-import React from "react";
+import React, { useState } from "react";
 import CardList from "./components/CardList/CardList";
 import { Label, TextInput } from "flowbite-react";
 import RotateAndScale from "@src/components/Interaction/RotateAndScale/RotateAndScale";
+import { Validators } from "@src/modules/FieldData/FieldData";
+import LoginActions from "./actions/LoginActions";
+import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
+import getFieldColor from "@src/modules/Utils/getFieldColor";
 
 export interface RILogin {}
 
 export namespace PILogin {}
 
 export default function Login(props: RILogin) {
+	const [state, setState] = useState<LoginScreen.State>({
+		email: new FieldDataClass("", Validators.validateNull),
+		password: new FieldDataClass("", Validators.validateNull),
+	});
+
+	const loginActions = new LoginActions(state, setState);
+
 	const heightHandle = useHeight();
 	return (
 		<div>
@@ -50,6 +61,14 @@ export default function Login(props: RILogin) {
 										<Label htmlFor="email1" value="Your email" />
 									</div>
 									<TextInput
+										helperText={<>{state.email.getError()}</>}
+										color={getFieldColor(state.email, undefined, true)}
+										onChange={(d) => {
+											loginActions.setEmail(d.target.value);
+										}}
+										onBlur={() => {
+											loginActions.validateEmail();
+										}}
 										id="email1"
 										placeholder="name@itbhu.ac.in"
 										required
@@ -62,10 +81,18 @@ export default function Login(props: RILogin) {
 										<Label htmlFor="password" value="Your password" />
 									</div>
 									<TextInput
+										helperText={<>{state.password.getError()}</>}
+										color={getFieldColor(state.password, undefined, true)}
+										onChange={(d) => {
+											loginActions.setPassword(d.target.value);
+										}}
+										onBlur={() => {
+											loginActions.validatePassword();
+										}}
 										id="email1"
 										placeholder="enter your password"
 										required
-										type="email"
+										type="password"
 									/>
 								</div>
 

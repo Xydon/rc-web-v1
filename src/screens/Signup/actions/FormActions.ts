@@ -27,7 +27,7 @@ export default class FormActions extends ServerStateUtils<SignupScreen.State> {
 		let verdict = true;
 		this.mutateState((p) => {
 			p.userName.validate();
-			verdict = p.userName.hasError();
+			verdict = !p.userName.hasError();
 		});
 
 		return verdict;
@@ -43,7 +43,7 @@ export default class FormActions extends ServerStateUtils<SignupScreen.State> {
 			if (res === undefined) {
 				email.setError("server error, cannot validate email");
 			} else {
-				if (res.data) {
+				if (!res.data) {
 					email.setError("email already exists!");
 				}
 			}
@@ -54,7 +54,7 @@ export default class FormActions extends ServerStateUtils<SignupScreen.State> {
 			p.email = email;
 		});
 
-		return email.hasError();
+		return !email.hasError();
 	}
 
 	validatePassword() {
@@ -66,12 +66,14 @@ export default class FormActions extends ServerStateUtils<SignupScreen.State> {
 	}
 
 	async validateAll() {
-		const verdict = [
-			await this.validateEmail(),
-			this.validateName(),
-			this.validatePassword(),
-		].reduce((a, c) => a && c, true);
+		const res = await this.handleAsync("validateAll", async () =>
+			[
+				await this.validateEmail(),
+				this.validateName(),
+				this.validatePassword(),
+			].reduce((a, c) => a && c, true)
+		);
 
-		return verdict;
+		return res;
 	}
 }
