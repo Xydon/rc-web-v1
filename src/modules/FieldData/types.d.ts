@@ -92,4 +92,5 @@ declare class FieldDataClass {
 	validate(): boolean;
 
 	hasTouched(): boolean;
+	clearField(): void;
 }
