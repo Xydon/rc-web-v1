@@ -9,6 +9,7 @@ import CreateArticlePageActions from "./actions/CreateArticlePageActions";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
 import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import { Validators } from "@src/modules/FieldData/FieldData";
+import { Button } from "@mui/material";
 
 export interface RICreateFresh {}
 
@@ -43,7 +44,7 @@ export default function CreateFresh(props: RICreateFresh) {
 			>
 				<ResponsiveContainer>
 					<div className="flex justify-between mb-sys-39">
-						<div>
+						<div className="flex justify-between">
 							<Typography.H2>Create Your Article</Typography.H2>
 						</div>
 
@@ -137,6 +138,20 @@ export default function CreateFresh(props: RICreateFresh) {
 									createArticlePageActions.validateNote();
 								}}
 							/>
+						</div>
+						<div className="flex">
+							<div className="mr-2">
+								<SystemButtons.Regular
+									textColorClassName="text-white"
+									bgColorClassName="bg-black"
+									borderColorClassName=""
+								>
+									Submit for review
+								</SystemButtons.Regular>
+							</div>
+							<div className="mr-2">
+								<SystemButtons.Regular>Discard</SystemButtons.Regular>
+							</div>
 						</div>
 					</div>
 				</ResponsiveContainer>

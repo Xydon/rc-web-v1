@@ -141,4 +141,10 @@ export default class FieldDataClass {
   hasTouched() {
     return this.touched;
   }
+
+  clearField() {
+    this.value = '';
+    this.error = undefined;
+    this.touched = false;
+  }
 }
