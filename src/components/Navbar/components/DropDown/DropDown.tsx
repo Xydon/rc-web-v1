@@ -36,33 +36,33 @@ export default function DropDown(props: RIDropDown) {
 	}, []);
 
 	return (
-		<ClickAwayListener
-			onClickAway={function (event: MouseEvent | TouchEvent): void {
-				setShowDD(false);
+		// <ClickAwayListener
+		// 	onClickAway={function (event: MouseEvent | TouchEvent): void {
+		// 		setShowDD(false);
+		// 	}}
+		// >
+		<div
+			className="cursor-pointer px-3 relative"
+			ref={ref}
+			onClick={() => {
+				setShowDD(true);
 			}}
 		>
-			<div
-				className="cursor-pointer px-3 relative"
-				ref={ref}
-				onClick={() => {
-					setShowDD(true);
-				}}
-			>
-				<p className="text-small font-medium text-slate-700">{text}</p>
-				{showDD && (
-					<div
-						style={{
-							position: "absolute",
-							top: "90%",
-							paddingTop: 8,
-							left: 0,
-							zIndex: 1000000,
-						}}
-					>
-						{props.DropDownNode}
-					</div>
-				)}
-			</div>
-		</ClickAwayListener>
+			<p className="text-small font-medium text-slate-700">{text}</p>
+			{showDD && (
+				<div
+					style={{
+						position: "absolute",
+						top: "90%",
+						paddingTop: 8,
+						left: 0,
+						zIndex: 1000000,
+					}}
+				>
+					{props.DropDownNode}
+				</div>
+			)}
+		</div>
+		// </ClickAwayListener>
 	);
 }
