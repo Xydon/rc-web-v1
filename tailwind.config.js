@@ -20,6 +20,9 @@ module.exports = {
 				"sys-39": 39,
 				"sys-63": 63,
 			},
+			fontSize: {
+				'2xs':'0.7rem',
+			}		  
 		},
 	},
 	plugins: [require("flowbite/plugin")],
