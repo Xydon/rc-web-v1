@@ -1,11 +1,14 @@
 import ArticleCards from "@src/components/ArticleCards/ArticleCards";
+import ArticleDisplayCard from "@src/components/ArticleDisplayCard/ArticleDisplayCard";
 import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 import Navbar from "@src/components/Navbar/Navbar";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import useHeight from "@src/modules/hooks/useHeight";
+import getArticlesData from "./fetch/api/getArticlesData";
 import { Label, Radio, TextInput } from "flowbite-react";
 import React from "react";
+// import ArticleDisplayC
 
 export interface RIArticleReviewList {}
 
@@ -40,7 +43,7 @@ export default function AllArticles(props: RIArticleReviewList) {
 							<SystemButtons.Regular>Apply</SystemButtons.Regular>
 						</div>
 					</div>
-					<ArticleCards.ScreenContainerLayout>
+					{/* <ArticleCards.ScreenContainerLayout>
 						<ArticleCards.Box>
 							<ArticleCards.SimpleArticleCard
 								data={{
@@ -52,7 +55,20 @@ export default function AllArticles(props: RIArticleReviewList) {
 
 							</ArticleCards.SimpleArticleCard>
 						</ArticleCards.Box>
-					</ArticleCards.ScreenContainerLayout>
+					</ArticleCards.ScreenContainerLayout> */}
+					<div className="my-5 grid grid-cols-2">
+						{getArticlesData(0).map((article, index) => (
+							<div className="my-5 mx-3 ">
+								<ArticleDisplayCard
+									key={index}
+									heading={article.heading}
+									byLine={article.byLine}
+									category={article.category}
+								/>
+							</div>
+							
+						))}
+					</div>
 				</ResponsiveContainer>
 			</div>
 		</div>
