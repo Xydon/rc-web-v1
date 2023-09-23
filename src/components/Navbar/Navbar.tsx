@@ -54,7 +54,10 @@ export default function Navbar(props: RINavbar) {
 										animate={{ opacity: 1, y: 0 }}
 									>
 										<ListGroup>
-											<ListGroup.Item>All Articles</ListGroup.Item>
+											<ListGroup.Item>
+											<Link to={"/article/allArticles"}>
+													All Articles
+												</Link></ListGroup.Item>
 											<ListGroup.Item>
 												<Link to={"/article/myArticles"}>My Articles</Link>
 											</ListGroup.Item>
