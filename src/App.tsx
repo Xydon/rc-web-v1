@@ -11,6 +11,8 @@ import MyArticles from "./screens/MyArticles/MyArticles";
 import CreatePost from "./screens/CreatePost/CreatePost";
 import PostReviewList from "./screens/PostReviewList/PostReviewList";
 import AllArticles from "./screens/AllArticles/AllArticles";
+import AllPostScreen from "./screens/AllPosts/AllPostScreen";
+import MyPosts from "./screens/MyPosts/MyPosts";
 
 function App() {
 	return (
@@ -27,6 +29,9 @@ function App() {
 			<Route path="/post/create" element={<CreatePost />} />
 			<Route path="/post/reviewList" element={<PostReviewList />} />
 			<Route path='/article/allArticles' element={<AllArticles/ >} />
+			<Route path='/post/allPosts' element={<AllPostScreen/>} />
+			<Route path='/post/myPosts' element={<MyPosts/>} />
+			<Route path="*" element={<div>404</div>} />
 		</Routes>
 	);
 }
