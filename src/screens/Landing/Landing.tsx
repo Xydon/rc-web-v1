@@ -4,6 +4,7 @@ import Navbar from "@src/components/Navbar/Navbar";
 import HeroSection from "./sections/HeroSection/HeroSection";
 import OurInitiatives from "./sections/OurInitiatives/OurInitiatives";
 import useHeight from "@src/modules/hooks/useHeight";
+import CommunityArticles from "./sections/CommunityArticles/CommunityArticles";
 
 export interface RILanding {}
 
@@ -26,6 +27,8 @@ export default function Landing(props: RILanding) {
 			>
 				<HeroSection />
 				<OurInitiatives />
+				<div className="h-20" />
+				<CommunityArticles />
 			</div>
 		</div>
 	);

@@ -1,5 +1,5 @@
 import React from "react";
-import style from './index.module.scss';
+import style from "./index.module.scss";
 
 interface TypeProps {
 	children?: React.ReactNode;
@@ -63,6 +63,23 @@ function BodyEmphasis(
 	);
 }
 
+function BodySmall(
+	props: TypeProps &
+		React.HTMLAttributes<HTMLHeadingElement> & { smaller?: boolean }
+) {
+	const { children, smaller, ...rest } = props;
+	return (
+		<p
+			{...rest}
+			className={
+				smaller ? style["small-12"] : style["small-14"] + " " + rest.className
+			}
+		>
+			{children}
+		</p>
+	);
+}
+
 const Typography = {
 	H1,
 	H2,
@@ -70,6 +87,7 @@ const Typography = {
 	Body,
 	BodyEmphasis,
 	BodyLarge,
+	BodySmall,
 };
 
 export default Typography;
