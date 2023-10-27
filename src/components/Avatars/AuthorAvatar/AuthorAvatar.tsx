@@ -4,7 +4,7 @@ import React from "react";
 
 function AuthorAvatar() {
 	return (
-		<div style={{ padding: 16 }} className="flex gap-x-[16px]">
+		<div style={{  }} className="flex gap-x-[16px]">
 			<Avatar rounded  />
 			<div>
 				<Typography.Body className="font-medium">Chirag Goel</Typography.Body>

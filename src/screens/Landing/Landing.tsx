@@ -5,6 +5,7 @@ import HeroSection from "./sections/HeroSection/HeroSection";
 import OurInitiatives from "./sections/OurInitiatives/OurInitiatives";
 import useHeight from "@src/modules/hooks/useHeight";
 import CommunityArticles from "./sections/CommunityArticles/CommunityArticles";
+import TopPosts from "./sections/TopPosts/TopPosts";
 
 export interface RILanding {}
 
@@ -23,12 +24,15 @@ export default function Landing(props: RILanding) {
 					height: `calc(100vh - ${heightHandle.height}px)`,
 					overflowY: "auto",
 					overflowX: "hidden",
+					paddingBottom: 100
 				}}
 			>
 				<HeroSection />
 				<OurInitiatives />
 				<div className="h-20" />
 				<CommunityArticles />
+				<div style={{ height: 200 }} />
+				<TopPosts />
 			</div>
 		</div>
 	);
