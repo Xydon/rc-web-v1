@@ -10,6 +10,7 @@ import ArticleReviewList from "./screens/ArticleReviewList/ArticleReviewList";
 import MyArticles from "./screens/MyArticles/MyArticles";
 import CreatePost from "./screens/CreatePost/CreatePost";
 import PostReviewList from "./screens/PostReviewList/PostReviewList";
+import CommunityPosts from "./screens/CommunityPosts/CommunityPosts";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 			<Route path="/article/myArticles" element={<MyArticles />} />
 			<Route path="/post/create" element={<CreatePost />} />
 			<Route path="/post/reviewList" element={<PostReviewList />} />
+			<Route path="/post/community" element={<CommunityPosts />} />
 		</Routes>
 	);
 }

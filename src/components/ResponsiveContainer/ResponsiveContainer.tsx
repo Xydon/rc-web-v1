@@ -6,12 +6,17 @@ export interface RIResponsiveContainer {
 
 export namespace PIResponsiveContainer {}
 
-export default function ResponsiveContainer(props: RIResponsiveContainer) {
+export default function ResponsiveContainer(
+	props: RIResponsiveContainer & React.HTMLAttributes<HTMLDivElement>
+) {
+	const { children, ...rest } = props;
+
 	return (
 		<div
+			{...rest}
 			className={"px-[32px] md:px-[80px] xl:w-[1280px] mx-auto bg-transparent"}
 		>
-			{props.children}
+			{children}
 		</div>
 	);
 }

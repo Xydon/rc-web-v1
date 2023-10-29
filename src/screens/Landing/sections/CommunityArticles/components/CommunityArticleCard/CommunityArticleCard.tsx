@@ -9,7 +9,7 @@ function CommunityArticleCard() {
 	return (
 		<div
 			className="rounded border border-slate-300 hover:shadow-xl transition-shadow"
-			style={{ padding: 34, maxWidth: 428, width: "100%" }}
+			style={{ padding: 34, maxWidth: 424, width: "100%" }}
 		>
 			<div className="border-b border-slate-300 pb-6">
 				<Typography.BodyLarge

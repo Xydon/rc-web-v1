@@ -6,10 +6,10 @@ import { Avatar } from "@mui/material";
 
 function Comment() {
 	return (
-		<div className="flex items-start gap-x-4">
+		<div className="flex items-start gap-x-4 pr-3">
 			<Avatar />
-			<div>
-				<div className="flex items-start" style={{ columnGap: "40%" }}>
+			<div className="grow">
+				<div className="flex items-start justify-between" style={{ columnGap: "0%" }}>
 					<CommentAvatar />
 					<LikeButton />
 				</div>

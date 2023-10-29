@@ -12,9 +12,16 @@ import Comment from "./components/Comment/Comment";
 import CommentContainer from "./components/CommentContainer/CommentContainer";
 import CommentBox from "./components/CommentBox/CommentBox";
 
-function Post() {
+interface Props {
+	maxWidth ?: number;
+}
+
+function Post(props : Props) {
+
+	const {maxWidth} = props; 
+
 	return (
-		<Container>
+		<Container maxWidth={maxWidth}>
 			<PaddingContainer>
 				<ContentContainer>
 					<Typography.BodyLarge className="font-medium mb-2">

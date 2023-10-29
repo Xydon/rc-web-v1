@@ -9,6 +9,7 @@ module.exports = {
 			colors: {
 				rcBlue: "#4D7FED",
 				rcBluePrimary: "#3C79FF",
+				rcGreenPrimary: "#00A06B"
 			},
 			fontFamily: {
 				sans: "Inter, sans-serif",
