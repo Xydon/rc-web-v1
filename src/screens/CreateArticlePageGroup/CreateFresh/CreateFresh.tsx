@@ -162,7 +162,7 @@ export default function CreateFresh(props: RICreateFresh) {
 							<p className="mb-10 font-medium">Live Preview</p>
 
 							<div className="mb-sys-39 w-full markdown-area">
-								<Markdown>{state.body.getValue()}</Markdown>
+								<ReactMarkdown>{state.body.getValue()}</ReactMarkdown>
 							</div>
 						</div>
 					</div>

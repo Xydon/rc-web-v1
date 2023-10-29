@@ -44,6 +44,12 @@
     margin-top : 39px; 
   }
 
+  p {
+    code {
+      color: rgb(255, 69, 69);
+    }
+  }
+
   pre {
     padding: 16px; 
     @apply bg-slate-50;
