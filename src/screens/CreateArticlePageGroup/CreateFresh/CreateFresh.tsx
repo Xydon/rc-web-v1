@@ -10,6 +10,8 @@ import getFieldColor from "@src/modules/Utils/getFieldColor";
 import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import { Validators } from "@src/modules/FieldData/FieldData";
 import { Button } from "@mui/material";
+import ReactMarkdown from "react-markdown";
+import Markdown from "react-markdown";
 
 export interface RICreateFresh {}
 
@@ -63,94 +65,104 @@ export default function CreateFresh(props: RICreateFresh) {
 							</div>
 						</div>
 					</div>
-					<div className="w-1/2">
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-head" value="Article Heading" />
+
+					<div className="flex flex-col md:flex-row gap-y-10">
+						<div className="basis-1/2">
+							<div className="mb-sys-24">
+								<div className="mb-2 block">
+									<Label htmlFor="art-head" value="Article Heading" />
+								</div>
+								<TextInput
+									helperText={<>{state.heading.getError()}</>}
+									color={getFieldColor(state.heading, undefined, true)}
+									id="art-head"
+									placeholder="The Cat is both dead and alive!"
+									required
+									type="text"
+									onChange={(d) => {
+										createArticlePageActions.setHeading(d.target.value);
+									}}
+									onBlur={() => {
+										createArticlePageActions.validateHeading();
+									}}
+								/>
 							</div>
-							<TextInput
-								helperText={<>{state.heading.getError()}</>}
-								color={getFieldColor(state.heading, undefined, true)}
-								id="art-head"
-								placeholder="The Cat is both dead and alive!"
-								required
-								type="text"
-								onChange={(d) => {
-									createArticlePageActions.setHeading(d.target.value);
-								}}
-								onBlur={() => {
-									createArticlePageActions.validateHeading();
-								}}
-							/>
+							<div className="mb-sys-24">
+								<div className="mb-2 block">
+									<Label htmlFor="art-by-line" value="Enter Article ByLine" />
+								</div>
+								<TextInput
+									helperText={<>{state.byLine.getError()}</>}
+									color={getFieldColor(state.byLine, undefined, true)}
+									id="art-by-line"
+									placeholder="Learn how Schrodinger Equation explains the same."
+									required
+									type="text"
+									onChange={(d) => {
+										createArticlePageActions.setByLine(d.target.value);
+									}}
+									onBlur={() => {
+										createArticlePageActions.validateByLine();
+									}}
+								/>
+							</div>
+							<div className="mb-sys-24">
+								<div className="mb-2 block">
+									<Label htmlFor="art-body" value="Enter Article Body" />
+								</div>
+								<Textarea
+									color={getFieldColor(state.body, undefined, true)}
+									helperText={<>{state.body.getError()}</>}
+									id="art-body"
+									placeholder="An awesome journey begins here...."
+									required
+									rows={8}
+									onChange={(d) => {
+										createArticlePageActions.setBody(d.target.value);
+									}}
+									onBlur={() => {
+										createArticlePageActions.validateBody();
+									}}
+								/>
+							</div>
+							<div className="mb-sys-24">
+								<div className="mb-2 block">
+									<Label htmlFor="art-submit-note" value="Notes for reviewer" />
+								</div>
+								<Textarea
+									color={getFieldColor(state.note, undefined, true)}
+									helperText={<>{state.note.getError()}</>}
+									id="art-submit-note"
+									placeholder="Enter Note"
+									rows={4}
+									onChange={(d) => {
+										createArticlePageActions.setNote(d.target.value);
+									}}
+									onBlur={() => {
+										createArticlePageActions.validateNote();
+									}}
+								/>
+							</div>
+							<div className="flex">
+								<div className="mr-2">
+									<SystemButtons.Regular
+										textColorClassName="text-white"
+										bgColorClassName="bg-black"
+										borderColorClassName=""
+									>
+										Submit for review
+									</SystemButtons.Regular>
+								</div>
+								<div className="mr-2">
+									<SystemButtons.Regular>Discard</SystemButtons.Regular>
+								</div>
+							</div>
 						</div>
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-by-line" value="Enter Article ByLine" />
-							</div>
-							<TextInput
-								helperText={<>{state.byLine.getError()}</>}
-								color={getFieldColor(state.byLine, undefined, true)}
-								id="art-by-line"
-								placeholder="Learn how Schrodinger Equation explains the same."
-								required
-								type="text"
-								onChange={(d) => {
-									createArticlePageActions.setByLine(d.target.value);
-								}}
-								onBlur={() => {
-									createArticlePageActions.validateByLine();
-								}}
-							/>
-						</div>
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-body" value="Enter Article Body" />
-							</div>
-							<Textarea
-								color={getFieldColor(state.body, undefined, true)}
-								helperText={<>{state.body.getError()}</>}
-								id="art-body"
-								placeholder="An awesome journey begins here...."
-								required
-								rows={8}
-								onChange={(d) => {
-									createArticlePageActions.setBody(d.target.value);
-								}}
-								onBlur={() => {
-									createArticlePageActions.validateBody();
-								}}
-							/>
-						</div>
-						<div className="mb-sys-24">
-							<div className="mb-2 block">
-								<Label htmlFor="art-submit-note" value="Notes for reviewer" />
-							</div>
-							<Textarea
-								color={getFieldColor(state.note, undefined, true)}
-								helperText={<>{state.note.getError()}</>}
-								id="art-submit-note"
-								placeholder="Enter Note"
-								rows={4}
-								onChange={(d) => {
-									createArticlePageActions.setNote(d.target.value);
-								}}
-								onBlur={() => {
-									createArticlePageActions.validateNote();
-								}}
-							/>
-						</div>
-						<div className="flex">
-							<div className="mr-2">
-								<SystemButtons.Regular
-									textColorClassName="text-white"
-									bgColorClassName="bg-black"
-									borderColorClassName=""
-								>
-									Submit for review
-								</SystemButtons.Regular>
-							</div>
-							<div className="mr-2">
-								<SystemButtons.Regular>Discard</SystemButtons.Regular>
+						<div className="basis-1/2 md:pl-[63px] markdown-area">
+							<p className="mb-10 font-medium">Live Preview</p>
+
+							<div className="mb-sys-39 w-full markdown-area">
+								<Markdown>{state.body.getValue()}</Markdown>
 							</div>
 						</div>
 					</div>

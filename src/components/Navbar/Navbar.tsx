@@ -128,7 +128,9 @@ export default function Navbar(props: RINavbar) {
 											<ListGroup.Item>
 												<Link to={"/post/community"}>All Posts</Link>
 											</ListGroup.Item>
-											<ListGroup.Item>My Posts</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/post/myPosts"}>My Posts</Link>
+											</ListGroup.Item>
 											<ListGroup.Item>
 												<Link to={"/post/create"}>Create Post</Link>
 											</ListGroup.Item>
