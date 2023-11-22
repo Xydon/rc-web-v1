@@ -4,12 +4,14 @@ import Typography from "@src/components/Typography";
 import useHeight from "@src/modules/hooks/useHeight";
 import React, { useState } from "react";
 import CardList from "./components/CardList/CardList";
-import { Label, TextInput } from "flowbite-react";
+import { Label, Spinner, TextInput, Badge } from "flowbite-react";
 import RotateAndScale from "@src/components/Interaction/RotateAndScale/RotateAndScale";
-import { Validators } from "@src/modules/FieldData/FieldData";
+import { FieldDataService, Validators } from "@src/modules/FieldData/FieldData";
 import LoginActions from "./actions/LoginActions";
 import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
+import LoginServerContact from "./actions/LoginServerActions";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 
 export interface RILogin {}
 
@@ -17,11 +19,18 @@ export namespace PILogin {}
 
 export default function Login(props: RILogin) {
 	const [state, setState] = useState<LoginScreen.State>({
-		email: new FieldDataClass("", Validators.validateNull),
+		email: new FieldDataClass(
+			"",
+			FieldDataService.clubValidators(Validators.validateNull, Validators.email)
+		),
 		password: new FieldDataClass("", Validators.validateNull),
+		loading: {
+			loggingIn: AsyncStateFactory(),
+		},
 	});
 
 	const loginActions = new LoginActions(state, setState);
+	const loginServerActions = new LoginServerContact(state, setState);
 
 	const heightHandle = useHeight();
 	return (
@@ -50,10 +59,18 @@ export default function Login(props: RILogin) {
 						</div>
 						<div className="basis-1/2 p-8">
 							<div className="w-full p-8 rounded-xl shadow-md">
-								<div style={{ marginBottom: 39 }}>
+								<div
+									style={{ marginBottom: 39 }}
+									className="flex justify-between"
+								>
 									<Typography.H3 className="font-semibold text-slate-800">
 										Login
 									</Typography.H3>
+									{state.loading.loggingIn.status === "failed" && (
+										<Badge color="failure">
+											INCORRECT USERNAME OR PASSWORD
+										</Badge>
+									)}
 								</div>
 
 								<div className="mb-4">
@@ -99,10 +116,19 @@ export default function Login(props: RILogin) {
 								<button
 									style={{ padding: "11px 0", width: "100%" }}
 									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
+									onClick={() => {
+										if (loginActions.validateAll()) {
+											loginServerActions.login();
+										}
+									}}
 								>
-									<Typography.Body className="text-white font-semibold">
-										Login
-									</Typography.Body>
+									{state.loading.loggingIn.status === "initialized" ? (
+										<Spinner />
+									) : (
+										<Typography.Body className="text-white font-semibold">
+											Login
+										</Typography.Body>
+									)}
 								</button>
 							</div>
 						</div>

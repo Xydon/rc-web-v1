@@ -1,10 +1,11 @@
 import { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
 import LoginService from "../server/services/LoginService";
 
-export default class LoginServerContact extends ServerStateUtils<LoginScreen.LoadingStates> {
-	async login(email: string, password: string) {
-		const res = await this.handleAsync("login", () =>
-			LoginService({ email, password })
+export default class LoginServerContact extends ServerStateUtils<LoginScreen.State> {
+	async login() {
+		const { email, password } = this.state;
+		const res = await this.handleAsync("loggingIn", () =>
+			LoginService({ email: email.getValue(), password: password.getValue() })
 		);
 
 		if (!res) return;

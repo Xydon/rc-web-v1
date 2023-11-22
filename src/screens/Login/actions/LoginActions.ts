@@ -1,13 +1,17 @@
-import StateUtils, { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
+import StateUtils, {
+	ServerStateUtils,
+} from "@src/modules/StateManagement/Core/StateUtils";
 
 export default class LoginActions extends StateUtils<LoginScreen.State> {
 	setEmail(d: string) {
 		this.mutateState((p) => {
+			p.email.clearError();
 			p.email.setValue(d);
 		});
 	}
 	setPassword(d: string) {
 		this.mutateState((p) => {
+			p.password.clearError();
 			p.password.setValue(d);
 		});
 	}
@@ -17,7 +21,7 @@ export default class LoginActions extends StateUtils<LoginScreen.State> {
 		this.mutateState((p) => {
 			p.email = email;
 		});
-		return email.isVaild;
+		return email.isVaild();
 	}
 	validatePassword() {
 		const passsword = this.state.password;
@@ -25,7 +29,7 @@ export default class LoginActions extends StateUtils<LoginScreen.State> {
 		this.mutateState((p) => {
 			p.password = passsword;
 		});
-		return passsword.validate();
+		return passsword.isVaild();
 	}
 	validateAll() {
 		return [this.validateEmail(), this.validatePassword()].reduce(

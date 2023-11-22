@@ -7,5 +7,11 @@ export interface LoginDesc {
 }
 
 export default async function LoginService(params: LoginDesc) {
-	return LoginInstance.post<{user : UserDetails, token : string}>(apiIndex.login, params, { withCredentials: true });
+	return LoginInstance.post<{ user: UserDetails; token: string }>(
+		apiIndex.login,
+		params,
+		{
+			withCredentials: true,
+		}
+	);
 }
