@@ -12,6 +12,7 @@ import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
 import LoginServerContact from "./actions/LoginServerActions";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 
 export interface RILogin {}
 
@@ -113,7 +114,7 @@ export default function Login(props: RILogin) {
 									/>
 								</div>
 
-								<button
+								{/* <button
 									style={{ padding: "11px 0", width: "100%" }}
 									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
 									onClick={() => {
@@ -129,7 +130,23 @@ export default function Login(props: RILogin) {
 											Login
 										</Typography.Body>
 									)}
-								</button>
+								</button> */}
+								<SystemButtons.Base
+									style={{ padding: "11px 0", width: "100%" }}
+									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
+									onClick={() => {
+										if (loginActions.validateAll()) {
+											loginServerActions.login();
+										}
+									}}
+									textColorClassName="text-white"
+									limit={10}
+									loading={state.loading.loggingIn.status === "initialized"}
+								>
+									<Typography.Body className="text-white font-semibold">
+										Login
+									</Typography.Body>
+								</SystemButtons.Base>
 							</div>
 						</div>
 					</div>
