@@ -13,6 +13,7 @@ import getFieldColor from "@src/modules/Utils/getFieldColor";
 import LoginServerContact from "./actions/LoginServerActions";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import SystemButtons from "@src/components/Buttons/System/SystemButtons";
+import { useNavigate } from "react-router-dom";
 
 export interface RILogin {}
 
@@ -32,6 +33,8 @@ export default function Login(props: RILogin) {
 
 	const loginActions = new LoginActions(state, setState);
 	const loginServerActions = new LoginServerContact(state, setState);
+
+	const navigate = useNavigate();
 
 	const heightHandle = useHeight();
 	return (
@@ -136,7 +139,9 @@ export default function Login(props: RILogin) {
 									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
 									onClick={() => {
 										if (loginActions.validateAll()) {
-											loginServerActions.login();
+											loginServerActions.login().then((v) => {
+												navigate("/");
+											});
 										}
 									}}
 									textColorClassName="text-white"
