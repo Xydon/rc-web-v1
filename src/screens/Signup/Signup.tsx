@@ -1,6 +1,6 @@
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import useHeight from "@src/modules/hooks/useHeight";
-import { Label, Spinner, TextInput } from "flowbite-react";
+import { Badge, Label, Spinner, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import CardList from "../Login/components/CardList/CardList";
 import Typography from "@src/components/Typography";
@@ -76,10 +76,17 @@ export default function Signup(props: RISignup) {
 						<div className="basis-1/2 pl-6">
 							<form>
 								<div className="w-full p-8 rounded-xl shadow-md">
-									<div style={{ marginBottom: 27 }}>
+									<div
+										style={{ marginBottom: 27 }}
+										className="flex justify-between"
+									>
 										<Typography.H3 className="font-semibold text-slate-800">
 											Sign Up
 										</Typography.H3>
+
+										{state.loading.createUser.status === "failed" && (
+											<Badge color="fail">FAILED TO SIGNUP</Badge>
+										)}
 									</div>
 
 									<div className="mb-4">
