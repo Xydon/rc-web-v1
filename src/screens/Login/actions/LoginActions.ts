@@ -1,4 +1,4 @@
-import StateUtils from "@src/modules/StateManagement/Core/StateUtils";
+import StateUtils, { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
 
 export default class LoginActions extends StateUtils<LoginScreen.State> {
 	setEmail(d: string) {

@@ -3,4 +3,10 @@ namespace LoginScreen {
 		email: FieldDataClass;
 		password: FieldDataClass;
 	}
+
+	interface LoadingStates {
+		loading: {
+			loggingIn: AsyncState;
+		};
+	}
 }
