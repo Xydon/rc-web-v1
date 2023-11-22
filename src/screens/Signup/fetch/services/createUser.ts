@@ -8,5 +8,9 @@ export interface SignupBody {
 }
 
 export default async function createUser(data: SignupBody) {
-	return SignupInstance.post(apiIndex.createUser, data);
+	return SignupInstance.post<{ user: UserDetails; token: string }>(
+		apiIndex.createUser,
+		data,
+		{ withCredentials: true }
+	);
 }

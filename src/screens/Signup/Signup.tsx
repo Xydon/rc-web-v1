@@ -14,6 +14,7 @@ import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStat
 import getFieldMessage from "@src/modules/Utils/getFieldMessage";
 import getCommonLoadingStatus from "@src/modules/Utils/getCommonLoadingStatus";
 import SignupActions from "./actions/SignupActions";
+import { useNavigate } from "react-router-dom";
 
 export interface RISignup {}
 
@@ -44,6 +45,9 @@ export default function Signup(props: RISignup) {
 
 	const formActions = new FormActions(state, setState);
 	const signupActions = new SignupActions(state, setState);
+
+	const navigate = useNavigate(); 
+
 
 	return (
 		<div>
@@ -177,7 +181,9 @@ export default function Signup(props: RISignup) {
 										onClick={() => {
 											formActions.validateAll().then((v) => {
 												console.log("verdict ", v);
-												if (v) signupActions.signup();
+												if (v) signupActions.signup().then(v => {
+													navigate('/')
+												});
 											});
 										}}
 									>

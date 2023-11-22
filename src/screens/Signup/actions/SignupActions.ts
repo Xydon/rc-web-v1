@@ -9,6 +9,10 @@ export default class SignupActions extends ServerStateUtils<SignupScreen.State> 
 			password: this.state.password.getValue(),
 		};
 
-		this.handleAsync("createUser", () => createUser(signupData));
+		const res = await this.handleAsync("createUser", () => createUser(signupData));
+
+		if (!res) return;
+
+		localStorage.setItem("user", JSON.stringify(res.data.user));
 	}
 }

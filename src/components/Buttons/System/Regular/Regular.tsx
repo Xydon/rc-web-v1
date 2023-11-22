@@ -10,7 +10,7 @@ export interface RIRegular {
 	onClick?: () => void;
 	limit?: number;
 	loading?: boolean;
-	spinnerProps ?: SpinnerProps
+	spinnerProps?: SpinnerProps;
 }
 
 export namespace PIRegular {}
@@ -25,7 +25,7 @@ export default function Regular(props: RIRegular) {
 		interactionType = "border",
 		limit = 500,
 		loading = false,
-		spinnerProps
+		spinnerProps,
 	} = props;
 
 	const [click, setClick] = useState(0);
@@ -46,7 +46,11 @@ export default function Regular(props: RIRegular) {
 			>
 				{loading ? <Spinner {...spinnerProps} /> : children}
 			</button>
-			<p className="text-red-500" style={{fontSize: 10}}>you have clicked too many times</p>
+			{click >= limit && (
+				<p className="text-red-500" style={{ fontSize: 10 }}>
+					you have clicked too many times
+				</p>
+			)}
 		</div>
 	);
 }
