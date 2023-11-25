@@ -72,4 +72,13 @@ export default class CreateArticlePageActions extends FieldStateUtils<CreateArti
 
 		return verdict;
 	}
+
+	discard() {
+		this.mutateState((v) => {
+			v.body.clearField();
+			v.byLine.clearField();
+			v.heading.clearField();
+			v.note.clearField();
+		});
+	}
 }

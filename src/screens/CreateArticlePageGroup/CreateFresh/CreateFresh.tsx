@@ -78,7 +78,13 @@ export default function CreateFresh(props: RICreateFresh) {
 								</SystemButtons.Regular>
 							</div>
 							<div className="mr-2">
-								<SystemButtons.Regular>Discard</SystemButtons.Regular>
+								<SystemButtons.Regular
+									onClick={() => {
+										createArticlePageActions.discard();
+									}}
+								>
+									Discard
+								</SystemButtons.Regular>
 							</div>
 						</div>
 					</div>
@@ -96,6 +102,7 @@ export default function CreateFresh(props: RICreateFresh) {
 									placeholder="The Cat is both dead and alive!"
 									required
 									type="text"
+									value={state.heading.getValue()}
 									onChange={(d) => {
 										createArticlePageActions.setHeading(d.target.value);
 									}}
@@ -115,6 +122,7 @@ export default function CreateFresh(props: RICreateFresh) {
 									placeholder="Learn how Schrodinger Equation explains the same."
 									required
 									type="text"
+									value={state.byLine.getValue()}
 									onChange={(d) => {
 										createArticlePageActions.setByLine(d.target.value);
 									}}
@@ -134,6 +142,7 @@ export default function CreateFresh(props: RICreateFresh) {
 									placeholder="An awesome journey begins here...."
 									required
 									rows={8}
+									value={state.body.getValue()}
 									onChange={(d) => {
 										createArticlePageActions.setBody(d.target.value);
 									}}
@@ -152,6 +161,7 @@ export default function CreateFresh(props: RICreateFresh) {
 									id="art-submit-note"
 									placeholder="Enter Note"
 									rows={4}
+									value={state.note.getValue()}
 									onChange={(d) => {
 										createArticlePageActions.setNote(d.target.value);
 									}}
