@@ -17,6 +17,7 @@ export default class AuthActions extends ServerStateUtils<AuthGuard.State> {
 	setUserDetails(details: UserDetails) {
 		this.mutateState((v) => {
 			v.userDetails = details;
+			v.isLoggedIn = true;
 		});
 	}
 }

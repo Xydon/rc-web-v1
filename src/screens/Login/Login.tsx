@@ -14,7 +14,7 @@ import LoginServerContact from "./actions/LoginServerActions";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 import { useNavigate } from "react-router-dom";
-// import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 
 export interface RILogin {}
 
@@ -38,9 +38,9 @@ export default function Login(props: RILogin) {
 	const navigate = useNavigate();
 
 	const heightHandle = useHeight();
-	// const {
-	// 	action: { setUserDetails },
-	// } = useAuthGuardContext();
+	const {
+		actions: { login },
+	} = useAuthGuardContext();
 	return (
 		<div>
 			<div ref={heightHandle.ref}>
@@ -114,36 +114,19 @@ export default function Login(props: RILogin) {
 										onBlur={() => {
 											loginActions.validatePassword();
 										}}
-										id="email1"
+										id="passwrod1"
 										placeholder="enter your password"
 										required
 										type="password"
 									/>
 								</div>
-
-								{/* <button
-									style={{ padding: "11px 0", width: "100%" }}
-									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
-									onClick={() => {
-										if (loginActions.validateAll()) {
-											loginServerActions.login();
-										}
-									}}
-								>
-									{state.loading.loggingIn.status === "initialized" ? (
-										<Spinner />
-									) : (
-										<Typography.Body className="text-white font-semibold">
-											Login
-										</Typography.Body>
-									)}
-								</button> */}
 								<SystemButtons.Base
 									style={{ padding: "11px 0", width: "100%" }}
 									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
 									onClick={() => {
 										if (loginActions.validateAll()) {
 											loginServerActions.login((d) => {
+												login(d);
 												navigate("/");
 											});
 										}
