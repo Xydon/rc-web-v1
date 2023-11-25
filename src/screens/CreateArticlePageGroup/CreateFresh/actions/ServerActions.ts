@@ -13,8 +13,21 @@ export default class ServerActions extends ServerStateUtils<CreateArticleScreen.
 			userId,
 		};
 
-		const res = await this.handleAsync("createArticle", () => {
-			return createArticleService(b);
-		});
+		const res = await this.handleAsync(
+			"createArticle",
+			() => {
+				return createArticleService(b);
+			},
+			{
+				onSuccess: () => {
+					alert("article successfully created");
+				},
+				onError: () => {
+					alert(
+						"failed to create article, please try again later or contact support"
+					);
+				},
+			}
+		);
 	}
 }
