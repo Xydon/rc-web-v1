@@ -14,6 +14,7 @@ import LoginServerContact from "./actions/LoginServerActions";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 import { useNavigate } from "react-router-dom";
+// import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 
 export interface RILogin {}
 
@@ -37,6 +38,9 @@ export default function Login(props: RILogin) {
 	const navigate = useNavigate();
 
 	const heightHandle = useHeight();
+	// const {
+	// 	action: { setUserDetails },
+	// } = useAuthGuardContext();
 	return (
 		<div>
 			<div ref={heightHandle.ref}>
@@ -139,7 +143,7 @@ export default function Login(props: RILogin) {
 									className="bg-indigo-500 rounded-md hover:bg-indigo-600 transition-all focus:ring-1 focus:ring-offset-2"
 									onClick={() => {
 										if (loginActions.validateAll()) {
-											loginServerActions.login().then((v) => {
+											loginServerActions.login((d) => {
 												navigate("/");
 											});
 										}

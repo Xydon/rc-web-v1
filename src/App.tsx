@@ -12,24 +12,27 @@ import CreatePost from "./screens/CreatePost/CreatePost";
 import PostReviewList from "./screens/PostReviewList/PostReviewList";
 import CommunityPosts from "./screens/CommunityPosts/CommunityPosts";
 import MyPosts from "./screens/MyPosts/MyPosts";
+import AuthGuard from "./AuthGuard/AuthGuard";
 
 function App() {
 	return (
-		<Routes>
-			<Route path="/" element={<Landing />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/signup" element={<Signup />} />
-			<Route
-				path="/article/fresh"
-				element={<CreateArticlePageGroup.CreateFresh />}
-			/>
-			<Route path="/article/reviewList" element={<ArticleReviewList />} />
-			<Route path="/article/myArticles" element={<MyArticles />} />
-			<Route path="/post/create" element={<CreatePost />} />
-			<Route path="/post/reviewList" element={<PostReviewList />} />
-			<Route path="/post/community" element={<CommunityPosts />} />
-			<Route path="/post/myPosts" element={<MyPosts />} />
-		</Routes>
+		<AuthGuard>
+			<Routes>
+				<Route path="/" element={<Landing />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<Signup />} />
+				<Route
+					path="/article/fresh"
+					element={<CreateArticlePageGroup.CreateFresh />}
+				/>
+				<Route path="/article/reviewList" element={<ArticleReviewList />} />
+				<Route path="/article/myArticles" element={<MyArticles />} />
+				<Route path="/post/create" element={<CreatePost />} />
+				<Route path="/post/reviewList" element={<PostReviewList />} />
+				<Route path="/post/community" element={<CommunityPosts />} />
+				<Route path="/post/myPosts" element={<MyPosts />} />
+			</Routes>
+		</AuthGuard>
 	);
 }
 

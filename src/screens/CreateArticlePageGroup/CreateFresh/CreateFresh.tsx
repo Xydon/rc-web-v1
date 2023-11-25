@@ -12,6 +12,9 @@ import { Validators } from "@src/modules/FieldData/FieldData";
 import { Button } from "@mui/material";
 import ReactMarkdown from "react-markdown";
 import Markdown from "react-markdown";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import ServerActions from "./actions/ServerActions";
+// import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 
 export interface RICreateFresh {}
 
@@ -19,18 +22,23 @@ export namespace PICreateFresh {}
 
 export default function CreateFresh(props: RICreateFresh) {
 	const heightHandle = useHeight();
+	// const userId = useAuthGuardContext();
 
 	const [state, setState] = useState<CreateArticleScreen.State>({
 		heading: new FieldDataClass("", Validators.validateNull),
 		byLine: new FieldDataClass("", Validators.validateNull),
 		body: new FieldDataClass("", Validators.validateNull),
 		note: new FieldDataClass(""),
+		loading: {
+			createArticle: AsyncStateFactory(),
+		},
 	});
 
 	const createArticlePageActions = new CreateArticlePageActions(
 		state,
 		setState
 	);
+	const serverActions = new ServerActions(state, setState);
 
 	return (
 		<div>
@@ -56,6 +64,9 @@ export default function CreateFresh(props: RICreateFresh) {
 									textColorClassName="text-white"
 									bgColorClassName="bg-black"
 									borderColorClassName=""
+									onClick={() => {
+										// serverActions.createArticle()
+									}}
 								>
 									Submit for review
 								</SystemButtons.Regular>

@@ -4,5 +4,6 @@ namespace CreateArticleScreen {
 		byLine: FieldDataClass;
 		body: FieldDataClass;
 		note: FieldDataClass;
+		loading: Record<string, AsyncState>
 	}
 }

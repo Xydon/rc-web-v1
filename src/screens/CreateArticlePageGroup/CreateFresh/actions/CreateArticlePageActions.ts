@@ -61,4 +61,15 @@ export default class CreateArticlePageActions extends FieldStateUtils<CreateArti
 			(p, f) => (p.note = f)
 		);
 	}
+
+	validateAll() {
+		const verdict = [
+			this.validateNote(),
+			this.validateHeading(),
+			this.validateByLine(),
+			this.validateBody,
+		].reduce((a, c) => a && c, true);
+
+		return verdict;
+	}
 }

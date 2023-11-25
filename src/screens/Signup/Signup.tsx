@@ -46,8 +46,7 @@ export default function Signup(props: RISignup) {
 	const formActions = new FormActions(state, setState);
 	const signupActions = new SignupActions(state, setState);
 
-	const navigate = useNavigate(); 
-
+	const navigate = useNavigate();
 
 	return (
 		<div>
@@ -181,9 +180,10 @@ export default function Signup(props: RISignup) {
 										onClick={() => {
 											formActions.validateAll().then((v) => {
 												console.log("verdict ", v);
-												if (v) signupActions.signup().then(v => {
-													navigate('/')
-												});
+												if (v)
+													signupActions.signup((d) => {
+														navigate("/");
+													});
 											});
 										}}
 									>

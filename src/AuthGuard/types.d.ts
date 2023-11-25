@@ -1,10 +1,7 @@
 namespace AuthGuard {
-  interface State {
-    loginData : null | UserDetails;
-    isLoggedIn : boolean; 
-    loading : {
-      getIsLoggedIn : AsyncState,
-      logout : AsyncState
-    }
-  }
+	interface State {
+		isLoggedIn: boolean;
+		userDetails: UserDetails | null;
+    loading: Record<string, AsyncState>
+	}
 }

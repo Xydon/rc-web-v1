@@ -2,7 +2,7 @@ import { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
 import createUser, { SignupBody } from "../fetch/services/createUser";
 
 export default class SignupActions extends ServerStateUtils<SignupScreen.State> {
-	async signup() {
+	async signup(onSuccess: (d : UserDetails) => void) {
 		const signupData: SignupBody = {
 			userName: this.state.userName.getValue(),
 			email: this.state.email.getValue(),
@@ -13,6 +13,6 @@ export default class SignupActions extends ServerStateUtils<SignupScreen.State> 
 
 		if (!res) return;
 
-		localStorage.setItem("user", JSON.stringify(res.data.user));
+		onSuccess(res.data.user);
 	}
 }

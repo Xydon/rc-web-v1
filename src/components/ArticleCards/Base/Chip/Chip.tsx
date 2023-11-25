@@ -32,7 +32,7 @@ export default function Chip(props: RIChip) {
 		}
 	}, []);
 
-	console.log(isHovering);
+	
 
 	return (
 		<div
