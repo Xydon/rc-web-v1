@@ -58,12 +58,21 @@ export default function ReviewList(props: RIReviewList) {
 				<div className="mb-sys-15">{children}</div>
 				<div className="flex justify-end">
 					<div className="mr-3">
-						<SystemButtons.Regular>Discard</SystemButtons.Regular>
+						<SystemButtons.Regular
+							onClick={() => {
+								onDiscard && onDiscard();
+							}}
+						>
+							Discard
+						</SystemButtons.Regular>
 					</div>
 					<div>
 						<SystemButtons.Regular
 							bgColorClassName="bg-rcBluePrimary"
 							textColorClassName="text-white"
+							onClick={() => {
+								onView && onView();
+							}}
 						>
 							View
 						</SystemButtons.Regular>

@@ -1,5 +1,6 @@
 import { ServerStateUtils } from "@src/modules/StateManagement/Core/StateUtils";
 import getArticles from "../fetch/services/getArticles";
+import deleteArticleService from "../fetch/services/deleteArticle";
 
 export default class PageActions extends ServerStateUtils<ArticleReviewList.State> {
 	async fetchArticles(userId: string) {
@@ -11,6 +12,20 @@ export default class PageActions extends ServerStateUtils<ArticleReviewList.Stat
 				v.articles = res.data;
 			});
 		}
+	}
+
+	private removeArticle(articleId: string) {
+		this.mutateState((v) => {
+			v.articles = v.articles.filter((k) => k.articleId !== articleId);
+		});
+	}
+
+	async deleteArticle(articleId: string) {
+		this.handleAsync("deleteArticle", () => deleteArticleService(articleId), {
+			onSuccess: () => {
+				this.removeArticle(articleId);
+			},
+		});
 	}
 
 	private match(a: string, b: string) {
@@ -28,7 +43,6 @@ export default class PageActions extends ServerStateUtils<ArticleReviewList.Stat
 			v.query = query;
 		});
 	}
-	filterArticles() {}
 
 	articleList() {
 		return this.state.articles.filter((v) => {
