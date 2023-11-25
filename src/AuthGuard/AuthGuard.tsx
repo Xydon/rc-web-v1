@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthActions from "./actions/AuthActions";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 
 interface Props {
 	children?: React.ReactNode;
@@ -22,7 +23,9 @@ function AuthGuard(props: Props) {
 	const [state, setState] = useState<AuthGuard.State>({
 		isLoggedIn: false,
 		userDetails: null,
-		loading: {},
+		loading: {
+			isLoggedIn: AsyncStateFactory(),
+		},
 	});
 
 	const authActions = new AuthActions(state, setState);
@@ -31,22 +34,24 @@ function AuthGuard(props: Props) {
 		authActions.isLoggedIn();
 	}, []);
 
-	return (
-		<AuthContext.Provider
-			value={{
-				userDetails: state.userDetails,
-				isLoggedIn: state.isLoggedIn,
-				actions: {
-					login: (d) => {
-						authActions.setUserDetails(d);
+	if (state.loading.isLoggedIn.status === "success")
+		return (
+			<AuthContext.Provider
+				value={{
+					userDetails: state.userDetails,
+					isLoggedIn: state.isLoggedIn,
+					actions: {
+						login: (d) => {
+							authActions.setUserDetails(d);
+						},
+						logout: async () => {},
 					},
-					logout: async () => {},
-				},
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+				}}
+			>
+				{children}
+			</AuthContext.Provider>
+		);
+	return <></>;
 }
 
 export default AuthGuard;
