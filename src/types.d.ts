@@ -15,3 +15,5 @@ interface UserDetails {
 	profileImage: Image;
 	role: UserRole;
 }
+
+type ArticleReviewStatus = "submitted" | "accepted" | "rejected";
