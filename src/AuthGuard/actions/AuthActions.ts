@@ -4,10 +4,16 @@ import isLoggedInService from "../fetch/services/isLoggedIn";
 export default class AuthActions extends ServerStateUtils<AuthGuard.State> {
 	async isLoggedIn() {
 		const res = await this.handleAsync("isLoggedIn", () => isLoggedInService());
-		if (res === undefined || res.data === false) {
+
+		if (res === undefined) {
 			this.mutateState((v) => {
 				v.isLoggedIn = false;
 				v.userDetails = null;
+			});
+		} else {
+			this.mutateState((v) => {
+				v.isLoggedIn = true;
+				v.userDetails = res.data.user;
 			});
 		}
 	}

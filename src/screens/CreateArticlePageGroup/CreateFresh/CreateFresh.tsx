@@ -14,6 +14,7 @@ import ReactMarkdown from "react-markdown";
 import Markdown from "react-markdown";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import ServerActions from "./actions/ServerActions";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 // import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 
 export interface RICreateFresh {}
@@ -40,6 +41,8 @@ export default function CreateFresh(props: RICreateFresh) {
 	);
 	const serverActions = new ServerActions(state, setState);
 
+	const userDetails = useAuthGuardContext().userDetails as UserDetails;
+
 	return (
 		<div>
 			<div ref={heightHandle.ref}>
@@ -59,14 +62,17 @@ export default function CreateFresh(props: RICreateFresh) {
 						</div>
 
 						<div className="flex">
-							<div className="mr-2">
+							<div className="mr-2 text-rcGreenPrimary">
 								<SystemButtons.Regular
 									textColorClassName="text-white"
 									bgColorClassName="bg-black"
 									borderColorClassName=""
 									onClick={() => {
-										// serverActions.createArticle()
+										if (createArticlePageActions.validateAll()) {
+											serverActions.createArticle(userDetails.id);
+										}
 									}}
+									loading={state.loading.createArticle.status === "initialized"}
 								>
 									Submit for review
 								</SystemButtons.Regular>

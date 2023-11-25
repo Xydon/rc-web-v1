@@ -67,7 +67,7 @@ export default class CreateArticlePageActions extends FieldStateUtils<CreateArti
 			this.validateNote(),
 			this.validateHeading(),
 			this.validateByLine(),
-			this.validateBody,
+			this.validateBody(),
 		].reduce((a, c) => a && c, true);
 
 		return verdict;
