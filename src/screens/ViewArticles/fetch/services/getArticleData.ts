@@ -17,6 +17,7 @@ interface ArticleBody {
 		name: string;
 		likes: number;
 		hasLiked: boolean;
+		commentBody: string;
 	}[];
 }
 export default async function getArticleData(

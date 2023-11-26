@@ -5,10 +5,16 @@ import CommentAvatar from "./components/CommentAvatar/CommentAvatar";
 import { Avatar } from "@mui/material";
 
 interface Commentformat {
-	
+	commentId: string;
+	commentDate: string;
+	userId: string;
+	name: string;
+	likes: number;
+	hasLiked: boolean;
+	commentBody: string;
 }
 
-function Comment() {
+function Comment({ data }: { data: Commentformat }) {
 	return (
 		<div className="flex items-start gap-x-4 pr-3">
 			<Avatar />
@@ -18,15 +24,15 @@ function Comment() {
 					style={{ columnGap: "0%" }}
 				>
 					<CommentAvatar
-						userName={''}
-						userId={''}
-						postedOn={''}
+						userName={data.name}
+						userId={data.userId}
+						postedOn={data.commentDate}
 					/>
 					<LikeButton />
 				</div>
 				<div style={{ width: "80%" }}>
 					<Typography.BodySmall className="font-light">
-						{/* {data.} */}
+						{data.commentBody}
 					</Typography.BodySmall>
 				</div>
 			</div>

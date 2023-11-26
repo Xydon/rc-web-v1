@@ -70,6 +70,13 @@ export default class CreateArticlePageActions extends FieldStateUtils<CreateArti
 			this.validateBody(),
 		].reduce((a, c) => a && c, true);
 
+		console.log([
+			this.validateNote(),
+			this.validateHeading(),
+			this.validateByLine(),
+			this.validateBody(),
+		]);
+
 		return verdict;
 	}
 

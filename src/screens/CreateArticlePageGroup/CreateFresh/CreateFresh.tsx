@@ -29,7 +29,7 @@ export default function CreateFresh(props: RICreateFresh) {
 		heading: new FieldDataClass("", Validators.validateNull),
 		byLine: new FieldDataClass("", Validators.validateNull),
 		body: new FieldDataClass("", Validators.validateNull),
-		note: new FieldDataClass(""),
+		note: new FieldDataClass("", Validators.validateNull),
 		loading: {
 			createArticle: AsyncStateFactory(),
 		},
@@ -68,6 +68,7 @@ export default function CreateFresh(props: RICreateFresh) {
 									bgColorClassName="bg-black"
 									borderColorClassName=""
 									onClick={() => {
+										console.log(createArticlePageActions.validateAll());
 										if (createArticlePageActions.validateAll()) {
 											serverActions.createArticle(userDetails.id);
 										}

@@ -16,8 +16,12 @@ namespace ViewArticles {
 				name: string;
 				likes: number;
 				hasLiked: boolean;
+				commentBody: string
 			}[];
 		} | null;
+		comment: {
+			query: string;
+		};
 		loading: Record<string, AsyncState>;
 	}
 }
