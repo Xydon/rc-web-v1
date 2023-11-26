@@ -9,6 +9,9 @@ namespace ViewArticles {
 				id: string;
 				name: string;
 			};
+			likes: number;
+			hasLiked: boolean;
+			createdOn: string;
 			comments: {
 				commentId: string;
 				commentDate: string;
@@ -16,7 +19,7 @@ namespace ViewArticles {
 				name: string;
 				likes: number;
 				hasLiked: boolean;
-				commentBody: string
+				commentBody: string;
 			}[];
 		} | null;
 		comment: {

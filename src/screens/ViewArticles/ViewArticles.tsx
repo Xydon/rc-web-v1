@@ -56,8 +56,20 @@ function ViewArticles() {
 						<Typography.H3 className="text-zinc-500 mb-sys-39">
 							{state.article.subheading}
 						</Typography.H3>
-						<div className="mb-sys-63">
-							<AuthorAvatar />
+						<div className="mb-sys-39 flex justify-between">
+							<AuthorAvatar
+								name={state.article.author.name}
+								sub={"written on " + state.article.createdOn}
+							/>
+							<SystemButtons.Regular
+								onClick={() => {
+									if (userDetails && id) {
+										actions.likeArticle(userDetails.id, id);
+									}
+								}}
+							>
+								Like ({state.article.likes})
+							</SystemButtons.Regular>
 						</div>
 						<div className="markdown-area mb-sys-63">
 							<ReactMarkdown remarkPlugins={[remarkGfm]}>
@@ -90,7 +102,7 @@ function ViewArticles() {
 							</SystemButtons.Regular>
 						</div>
 
-						<div className="flex flex-col gap-y-10">
+						<div className="flex flex-col gap-y-6">
 							{state.article.comments.map((v) => (
 								<Comment data={v} key={v.commentId} />
 							))}

@@ -6,6 +6,9 @@ interface ArticleBody {
 	heading: string;
 	subheading: string;
 	body: string;
+	createdOn: string;
+	likes: number;
+	hasLiked: boolean;
 	author: {
 		id: string;
 		name: string;
