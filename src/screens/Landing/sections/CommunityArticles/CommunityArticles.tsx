@@ -1,7 +1,7 @@
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import React from "react";
-import CommunityArticleCard from "./components/CommunityArticleCard/CommunityArticleCard";
+import CommunityArticleCard from "../../../../components/CommunityArticleCard/CommunityArticleCard";
 import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 
 function CommunityArticles() {

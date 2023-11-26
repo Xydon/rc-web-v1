@@ -14,23 +14,26 @@ import CommunityPosts from "./screens/CommunityPosts/CommunityPosts";
 import MyPosts from "./screens/MyPosts/MyPosts";
 import AuthGuard from "./AuthGuard/AuthGuard";
 import ViewArticles from "./screens/ViewArticles/ViewArticles";
+import AllArticles from "./screens/AllArticles/AllArticles";
 
 function App() {
 	return (
 		<AuthGuard>
 			<Routes>
-				{/* <Route path="/" element={<Landing />} /> */}
+				<Route path="/" element={<Landing />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route
 					path="/article/fresh"
 					element={<CreateArticlePageGroup.CreateFresh />}
 				/>
-				<Route path="/:id" element={<ViewArticles />} />
 				<Route path="/" element={<ViewArticles />} />
-				{/* <Route path="/article/view/:id" element={<ViewArticles />} /> */}
+				<Route path="/article/view/:id" element={<ViewArticles />} />
 				<Route path="/article/reviewList" element={<ArticleReviewList />} />
 				<Route path="/article/myArticles" element={<MyArticles />} />
+
+				<Route path="/article/all" element={<AllArticles />} />
+
 				<Route path="/post/create" element={<CreatePost />} />
 				<Route path="/post/reviewList" element={<PostReviewList />} />
 				<Route path="/post/community" element={<CommunityPosts />} />

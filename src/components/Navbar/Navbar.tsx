@@ -12,16 +12,16 @@ export interface RINavbar {}
 export namespace PINavbar {}
 
 export default function Navbar(props: RINavbar) {
-	const [hasScrolled, setHasScrolled] = useState(false);
+	// const [hasScrolled, setHasScrolled] = useState(false);
 
-	useEffect(() => {
-		const handler = (e: Event) => {
-			if (window.scrollY > 0) setHasScrolled(true);
-			else setHasScrolled(false);
-		};
-		window.addEventListener("scroll", handler);
-		return () => window.removeEventListener("scroll", handler);
-	}, []);
+	// useEffect(() => {
+	// 	const handler = (e: Event) => {
+	// 		if (window.scrollY > 0) setHasScrolled(true);
+	// 		else setHasScrolled(false);
+	// 	};
+	// 	window.addEventListener("scroll", handler);
+	// 	return () => window.removeEventListener("scroll", handler);
+	// }, []);
 
 	return (
 		<>
@@ -54,7 +54,9 @@ export default function Navbar(props: RINavbar) {
 										animate={{ opacity: 1, y: 0 }}
 									>
 										<ListGroup>
-											<ListGroup.Item>All Articles</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={"/article/all"}>All Articles</Link>
+											</ListGroup.Item>
 											<ListGroup.Item>
 												<Link to={"/article/myArticles"}>My Articles</Link>
 											</ListGroup.Item>
