@@ -13,16 +13,35 @@ import Typography from "@src/components/Typography";
 import useHeight from "@src/modules/hooks/useHeight";
 import { Label, Radio, TextInput } from "flowbite-react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import React from "react";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import React, { useEffect, useState } from "react";
+import PageActions from "./actions/PageActions";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
+import UnAuthPage from "@src/AuthGuard/components/UnAuthPage/UnAuthPage";
 
 export interface RIMyArticles {}
 
 export namespace PIMyArticles {}
 
 export default function MyArticles(props: RIMyArticles) {
+	const [state, setState] = useState<MyArticles.State>({
+		articles: [],
+		query: "",
+		loading: {},
+	});
+
+	const actions = new PageActions(state, setState);
 	const heightHandle = useHeight();
+	const { userDetails } = useAuthGuardContext();
+
+	useEffect(() => {
+		if (userDetails) actions.fetchArticles(userDetails.id);
+	}, []);
+
+	if (!userDetails) {
+		return <UnAuthPage />;
+	}
 
 	return (
 		<div>
@@ -40,18 +59,21 @@ export default function MyArticles(props: RIMyArticles) {
 					<div className="mb-sys-24">
 						<Typography.H2>My Articles</Typography.H2>
 					</div>
-					<div className="flex items-center w-full mb-sys-15">
+					<div className="flex items-center w-full mb-sys-39">
 						<div className="mr-sys-9 basis-1/2">
 							<TextInput
 								style={{ width: "100%" }}
 								placeholder="Search article"
+								onChange={(e) => {
+									actions.setQuery(e.target.value);
+								}}
 							/>
 						</div>
 						<div>
 							<SystemButtons.Regular>Apply</SystemButtons.Regular>
 						</div>
 					</div>
-					<fieldset
+					{/* <fieldset
 						className="flex max-w-md flex-row gap-4 mb-sys-39"
 						id="radio"
 					>
@@ -68,55 +90,66 @@ export default function MyArticles(props: RIMyArticles) {
 							<Radio id="Rejected" name="countries" value="Rejected" />
 							<Label htmlFor="spain">Rejected</Label>
 						</div>
-					</fieldset>
+					</fieldset> */}
 
 					<div className="mb-sys-24">
 						<Typography.BodyEmphasis>20 Articles</Typography.BodyEmphasis>
 					</div>
 
 					<ArticleCards.ScreenContainerLayout>
-						<ArticleCards.Box>
-							<ArticleCards.ReviewList
-								data={{
-									heading: "Heading",
-									byLine: "This is a by line",
-									category: "research topics",
-								}}
-							>
-								<div className="mb-sys-9">
-									<ArticleCards.Alerts
-										heading="Article Accepted"
-										variant="success"
-									>
-										<Typography.Body>
-											accepted on - 14 July 2023
-										</Typography.Body>
-									</ArticleCards.Alerts>
-								</div>
-								<div>
-									<List>
-										<ListItem>
-											<ListItemText>200 views</ListItemText>
-											<ListItemIcon>
-												<VisibilityIcon />
-											</ListItemIcon>
-										</ListItem>
-										<ListItem>
-											<ListItemText>19 likes</ListItemText>
-											<ListItemIcon>
-												<ThumbUpIcon />
-											</ListItemIcon>
-										</ListItem>
-										<ListItem>
-											<ListItemText>8 comments</ListItemText>
-											<ListItemIcon>
-												<ChatBubbleIcon />
-											</ListItemIcon>
-										</ListItem>
-									</List>
-								</div>
-							</ArticleCards.ReviewList>
-						</ArticleCards.Box>
+						{actions.getArticles().map((v) => (
+							<ArticleCards.Box key={v.articleId}>
+								<ArticleCards.ReviewList
+									data={{
+										heading: v.articleHeading,
+										byLine: v.articleSubHeading,
+										category: undefined,
+										onDiscard: () => {
+											actions.deleteArticle(v.articleId);
+										},
+									}}
+								>
+									<div className="mb-sys-9">
+										<ArticleCards.Alerts
+											heading="Article Accepted"
+											variant="success"
+										>
+											<Typography.Body>
+												accepted on - {v.articleAcceptedDate}
+											</Typography.Body>
+										</ArticleCards.Alerts>
+									</div>
+									<div>
+										<List>
+											<ListItem>
+												<ListItemText>
+													{v.articleStats.views} views
+												</ListItemText>
+												<ListItemIcon>
+													<VisibilityIcon />
+												</ListItemIcon>
+											</ListItem>
+											<ListItem>
+												<ListItemText>
+													{v.articleStats.likes} likes
+												</ListItemText>
+												<ListItemIcon>
+													<ThumbUpIcon />
+												</ListItemIcon>
+											</ListItem>
+											<ListItem>
+												<ListItemText>
+													{v.articleStats.comments} comments
+												</ListItemText>
+												<ListItemIcon>
+													<ChatBubbleIcon />
+												</ListItemIcon>
+											</ListItem>
+										</List>
+									</div>
+								</ArticleCards.ReviewList>
+							</ArticleCards.Box>
+						))}
 					</ArticleCards.ScreenContainerLayout>
 				</ResponsiveContainer>
 			</div>
