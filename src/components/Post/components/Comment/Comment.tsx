@@ -22,7 +22,7 @@ function Comment() {
 						userId={''}
 						postedOn={''}
 					/>
-					<LikeButton />
+					{/* <LikeButton /> */}
 				</div>
 				<div style={{ width: "80%" }}>
 					<Typography.BodySmall className="font-light">

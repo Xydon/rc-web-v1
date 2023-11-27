@@ -11,14 +11,14 @@ import CommentInput from "./components/CommentInput/CommentInput";
 import Comment from "./components/Comment/Comment";
 import CommentContainer from "./components/CommentContainer/CommentContainer";
 import CommentBox from "./components/CommentBox/CommentBox";
+import ImageSlideshow from "./components/ImageContainer/ImageContainer";
 
 interface Props {
-	maxWidth ?: number;
+	maxWidth?: number;
 }
 
-function Post(props : Props) {
-
-	const {maxWidth} = props; 
+function Post(props: Props) {
+	const { maxWidth } = props;
 
 	return (
 		<Container maxWidth={maxWidth}>
@@ -46,7 +46,15 @@ function Post(props : Props) {
 
 			<Divider />
 
-			<ImageContainer src="https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg" />
+			<div className="overflow-hidden">
+				<ImageSlideshow
+					images={[
+						"https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg",
+						"https://img.freepik.com/premium-photo/sexy-girl-portrait-summer-time-summer-vibes_942478-5863.jpg",
+						"https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg",
+					]}
+				/>
+			</div>
 
 			<Divider />
 
