@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import useHeight from "@src/modules/hooks/useHeight";
+import RcFooter from "../RcFooter/RcFooter";
 
 interface Props {
 	children?: React.ReactNode;
@@ -17,12 +18,15 @@ function Layout(props: Props) {
 			</div>
 			<div
 				style={{
-					maxHeight: `calc( 100vh - ${heightHandle.height}px )`,
+					height: `calc( 100vh - ${heightHandle.height}px )`,
 					overflow: "auto",
 					paddingTop: 63,
 				}}
 			>
-				{children}
+				<div className="min-h-full">{children}</div>
+				<div>
+					<RcFooter />
+				</div>
 			</div>
 		</div>
 	);

@@ -16,13 +16,15 @@ import AuthGuard from "./AuthGuard/AuthGuard";
 import ViewArticles from "./screens/ViewArticles/ViewArticles";
 import AllArticles from "./screens/AllArticles/AllArticles";
 import ResearchInterns from "./screens/ResearchInterns/ResearchInterns";
+import ResearchInternSpecification from "./screens/ResearchInternSpecification/ResearchInternSpecification";
 
 function App() {
 	return (
 		<AuthGuard>
 			<Routes>
 				{/* <Route path="/" element={<Landing />} /> */}
-				<Route path="/" element={<ResearchInterns />} />
+				<Route path="/" element={<ResearchInternSpecification />} />
+				<Route path="/researchInterns" element={<ResearchInterns />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route
