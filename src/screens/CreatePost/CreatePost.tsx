@@ -10,6 +10,11 @@ import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import CreatePostActions from "./actions/CreatePostActions";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
 import ImageUploader from "./components/ImageUploader/ImageUploader";
+import ServerActions from "./actions/ServerActions";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
+import UnAuthPage from "@src/AuthGuard/components/UnAuthPage/UnAuthPage";
+import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 export interface RICreatePost {}
 
@@ -24,9 +29,19 @@ export default function CreatePost(props: RICreatePost) {
 			FieldDataService.clubValidators(Validators.validateNull)
 		),
 		images: [],
+		loading: {
+			createPost: AsyncStateFactory(),
+		},
 	});
 
+	const { userDetails } = useAuthGuardContext();
 	const createPostActions = new CreatePostActions(state, setState);
+	const serverActions = new ServerActions(state, setState);
+	const navigate = useNavigate();
+
+	if (!userDetails) {
+		return <UnAuthPage />;
+	}
 
 	return (
 		<div>
@@ -55,8 +70,12 @@ export default function CreatePost(props: RICreatePost) {
 									onClick={() => {
 										if (createPostActions.validateForm()) {
 											// Submit
+											serverActions.createPost(userDetails.id, () => {
+												navigate(-1);
+											});
 										}
 									}}
+									loading={state.loading.createPost.status === "initialized"}
 								>
 									Submit for review
 								</SystemButtons.Regular>
@@ -99,7 +118,9 @@ export default function CreatePost(props: RICreatePost) {
 							</div>
 							<ImageUploader
 								onImagesUpload={function (images: File[]): void {
-									throw new Error("Function not implemented.");
+									createPostActions.mutateState((v) => {
+										v.images = images;
+									});
 								}}
 							/>
 						</div>
