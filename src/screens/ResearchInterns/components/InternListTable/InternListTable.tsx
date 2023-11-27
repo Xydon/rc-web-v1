@@ -37,7 +37,7 @@ const InternListTable: React.FC<TableProps> = ({ data }) => {
               <td className="py-2 px-4">{item.description}</td>
               <td className="py-2 px-4">
                 {item.attachments.map((attachment, idx) => (
-                  <a key={idx} href={attachment.link} target="_blank" rel="noopener noreferrer" className="block lowercase p-2 text-indigo-500 ">
+                  <a key={idx} href={attachment.link} target="_blank" rel="noopener noreferrer" className="block lowercase p-2 text-indigo-500 hover:underline">
                     {attachment.alt}
                   </a>
                 ))}

@@ -3,7 +3,7 @@ import Layout from "@src/components/Layout/Layout";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import { TextInput } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import AttributeChip from "./components/AttributeChip/AttributeChip";
 import InternListTable from "./components/InternListTable/InternListTable";
 import Divider from "@src/components/ArticleCards/Base/Divider/Divider";
@@ -72,6 +72,11 @@ const dummyData = [
 ];
 
 function ResearchInterns() {
+	const [state, setState] = useState<ResearchInterns.State>({
+		internList: [],
+		loading: {},
+	});
+
 	return (
 		<Layout>
 			<ResponsiveContainer style={{ paddingBottom: 200 }}>
@@ -111,16 +116,3 @@ function ResearchInterns() {
 }
 
 export default ResearchInterns;
-interface ResearchInternData {
-	id: string;
-	name: string;
-	description: string;
-	attachments: {
-		link: string;
-		alt: string;
-	}[];
-	postedOn: Date;
-	institution: string;
-	attributes: string;
-	isActive: boolean;
-}
