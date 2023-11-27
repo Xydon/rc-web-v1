@@ -15,12 +15,14 @@ import MyPosts from "./screens/MyPosts/MyPosts";
 import AuthGuard from "./AuthGuard/AuthGuard";
 import ViewArticles from "./screens/ViewArticles/ViewArticles";
 import AllArticles from "./screens/AllArticles/AllArticles";
+import ResearchInterns from "./screens/ResearchInterns/ResearchInterns";
 
 function App() {
 	return (
 		<AuthGuard>
 			<Routes>
-				<Route path="/" element={<Landing />} />
+				{/* <Route path="/" element={<Landing />} /> */}
+				<Route path="/" element={<ResearchInterns />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route

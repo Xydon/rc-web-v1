@@ -34,7 +34,7 @@ function AuthGuard(props: Props) {
 		authActions.isLoggedIn();
 	}, []);
 
-	if (state.loading.isLoggedIn.status === "success")
+	// if (state.loading.isLoggedIn.status === "success")
 		return (
 			<AuthContext.Provider
 				value={{
