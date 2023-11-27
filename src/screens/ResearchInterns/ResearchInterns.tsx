@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import AttributeChip from "./components/AttributeChip/AttributeChip";
 import InternListTable from "./components/InternListTable/InternListTable";
 import Divider from "@src/components/ArticleCards/Base/Divider/Divider";
+import ServerActions from "./actions/ServerActions";
 
 const dummyData = [
 	{
@@ -75,7 +76,11 @@ function ResearchInterns() {
 	const [state, setState] = useState<ResearchInterns.State>({
 		internList: [],
 		loading: {},
+		query: "",
 	});
+
+  //* use to set in the interns and fetch them
+  const actions = new ServerActions(state, setState); 
 
 	return (
 		<Layout>

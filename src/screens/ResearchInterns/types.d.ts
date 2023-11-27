@@ -14,6 +14,7 @@ namespace ResearchInterns {
 	}
 
 	interface State {
+    query: string; 
 		internList: ResearchInternData[];
 		loading: Record<string, AsyncState>;
 	}
