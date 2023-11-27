@@ -1,6 +1,7 @@
 namespace CreatePostScreen {
-  interface State {
-    postHeading: FieldDataClass;
-    postBody: FieldDataClass;
-  }
+	interface State {
+		postHeading: FieldDataClass;
+		images: File[];
+		postBody: FieldDataClass;
+	}
 }

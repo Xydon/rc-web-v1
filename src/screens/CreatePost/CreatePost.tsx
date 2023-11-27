@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import CreatePostActions from "./actions/CreatePostActions";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
+import ImageUploader from "./components/ImageUploader/ImageUploader";
 
 export interface RICreatePost {}
 
@@ -22,6 +23,7 @@ export default function CreatePost(props: RICreatePost) {
 			"",
 			FieldDataService.clubValidators(Validators.validateNull)
 		),
+		images: [],
 	});
 
 	const createPostActions = new CreatePostActions(state, setState);
@@ -51,7 +53,7 @@ export default function CreatePost(props: RICreatePost) {
 									bgColorClassName="bg-black"
 									borderColorClassName=""
 									onClick={() => {
-										if(createPostActions.validateForm()){
+										if (createPostActions.validateForm()) {
 											// Submit
 										}
 									}}
@@ -61,9 +63,9 @@ export default function CreatePost(props: RICreatePost) {
 							</div>
 							<div className="mr-2">
 								<SystemButtons.Regular
-								onClick={()=>{
-									createPostActions.resetForm()
-								}}
+									onClick={() => {
+										createPostActions.resetForm();
+									}}
 								>
 									Discard
 								</SystemButtons.Regular>
@@ -89,6 +91,16 @@ export default function CreatePost(props: RICreatePost) {
 								placeholder="My Awesome Post"
 								required
 								type="text"
+							/>
+						</div>
+						<div className="mb-sys-24">
+							<div className="mb-2 block">
+								<Label value="Upload Images" />
+							</div>
+							<ImageUploader
+								onImagesUpload={function (images: File[]): void {
+									throw new Error("Function not implemented.");
+								}}
 							/>
 						</div>
 						<div className="mb-sys-24">
