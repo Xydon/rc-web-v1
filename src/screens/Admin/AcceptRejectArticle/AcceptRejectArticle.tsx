@@ -5,6 +5,7 @@ import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveC
 import Typography from "@src/components/Typography";
 import { TextInput } from "flowbite-react";
 import React from "react";
+import EnhancedArticleCard from "./components/EnhancedArticleCard/EnhancedArticleCard";
 
 function AcceptRejectArticle() {
 	return (
@@ -12,11 +13,12 @@ function AcceptRejectArticle() {
 			<ResponsiveContainer>
 				<div className="flex justify-between items-center">
 					<div>
-						<Typography.H2 className="mb-sys-9">All Articles</Typography.H2>
+						<Typography.H2 className="mb-sys-9">
+							Accept/Reject Article
+						</Typography.H2>
 						<Typography.Body className="text-zinc-500 max-w-2xl mb-sys-39">
-							Embark on a journey of knowledge and discovery as you explore our
-							collection of articles that span a myriad of topics, each crafted
-							with care and precision.
+							Use this page to either accept or reject an article, you can view
+							the article by clicking on the view button
 						</Typography.Body>
 					</div>
 
@@ -32,11 +34,9 @@ function AcceptRejectArticle() {
 				</div>
 
 				<div className="flex gap-4 flex-wrap" style={{ marginBottom: 56 }}>
-					<CommunityArticleCard />
-					<CommunityArticleCard />
-					<CommunityArticleCard />
-					<CommunityArticleCard />
-					<CommunityArticleCard />
+					<EnhancedArticleCard />
+					<EnhancedArticleCard />
+					<EnhancedArticleCard />
 				</div>
 			</ResponsiveContainer>
 		</Layout>

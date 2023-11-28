@@ -160,10 +160,10 @@ export default function Navbar(props: RINavbar) {
 										>
 											<ListGroup>
 												<ListGroup.Item>
-													<Link to={"/post/community"}>Accept articles</Link>
+													<Link to={"/admin/articleAction"}>Accept articles</Link>
 												</ListGroup.Item>
 												<ListGroup.Item>
-													<Link to={"/post/myPosts"}>Create Interns</Link>
+													<Link to={"/admin/createInterns"}>Create Interns</Link>
 												</ListGroup.Item>
 											</ListGroup>
 										</motion.div>

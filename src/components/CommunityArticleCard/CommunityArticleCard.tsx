@@ -5,11 +5,19 @@ import SystemButtons from "@src/components/Buttons/System/SystemButtons";
 import Typography from "@src/components/Typography";
 import React from "react";
 
-function CommunityArticleCard() {
+interface Props {
+	removeBorder?: boolean;
+}
+
+function CommunityArticleCard(props: Props) {
 	return (
 		<div
-			className="rounded border border-slate-300 hover:shadow-xl transition-shadow"
-			style={{ padding: 34, maxWidth: 1280/2.5, width: "100%" }}
+			className={`rounded  ${
+				props.removeBorder
+					? ""
+					: "border border-slate-300 hover:shadow-xl transition-shadow"
+			} `}
+			style={{ padding: 34, maxWidth: 1280 / 2.5, width: "100%" }}
 		>
 			<div className="border-b border-slate-300 pb-6">
 				<Typography.BodyLarge
@@ -41,10 +49,14 @@ function CommunityArticleCard() {
 				<div>
 					<ul>
 						<li className="">
-							<Typography.BodySmall smaller className="text-slate-500">14 Likes</Typography.BodySmall>
+							<Typography.BodySmall smaller className="text-slate-500">
+								14 Likes
+							</Typography.BodySmall>
 						</li>
 						<li className="">
-							<Typography.BodySmall smaller className="text-slate-500">3 Comments</Typography.BodySmall>
+							<Typography.BodySmall smaller className="text-slate-500">
+								3 Comments
+							</Typography.BodySmall>
 						</li>
 					</ul>
 				</div>

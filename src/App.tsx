@@ -18,13 +18,18 @@ import AllArticles from "./screens/AllArticles/AllArticles";
 import ResearchInterns from "./screens/ResearchInterns/ResearchInterns";
 import ResearchInternSpecification from "./screens/ResearchInternSpecification/ResearchInternSpecification";
 import MyPosts from "./screens/MyPosts/MyPosts";
+import AcceptRejectArticle from "./screens/Admin/AcceptRejectArticle/AcceptRejectArticle";
+import CreateInternList from "./screens/Admin/CreateInternList/CreateInternList";
 
 function App() {
 	return (
 		<AuthGuard>
 			<Routes>
-				{/* <Route path="/" element={<Landing />} /> */}
-				<Route path="/" element={<ResearchInternSpecification />} />
+				<Route path="/" element={<Landing />} />
+				<Route
+					path="/researchInterns/:id"
+					element={<ResearchInternSpecification />}
+				/>
 				<Route path="/researchInterns" element={<ResearchInterns />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
@@ -43,6 +48,9 @@ function App() {
 				<Route path="/post/reviewList" element={<PostReviewList />} />
 				<Route path="/post/community" element={<CommunityPosts />} />
 				<Route path="/post/myPosts" element={<MyPosts />} />
+
+				<Route path="/admin/articleAction" element={<AcceptRejectArticle />} />
+				<Route path="/admin/createInterns" element={<CreateInternList />} />
 			</Routes>
 		</AuthGuard>
 	);
