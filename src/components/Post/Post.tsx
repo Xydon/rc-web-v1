@@ -17,10 +17,17 @@ interface Props {
 	data: PostData;
 	onLike?: () => void;
 	onComment?: (e: string) => void;
+	onDelete?: () => void;
 }
 
 function Post(props: Props) {
-	const { maxWidth, data, onLike = () => {}, onComment = (e) => {} } = props;
+	const {
+		maxWidth,
+		data,
+		onLike = () => {},
+		onComment = (e) => {},
+		onDelete,
+	} = props;
 
 	const [state, setState] = useState("");
 
@@ -46,17 +53,30 @@ function Post(props: Props) {
 			<PaddingContainer>
 				<div className="flex justify-between h-fit items-center mb-8">
 					<AuthorAvatar name={data.user.name} sub={data.createdDate} />
-					<div>
-						<SystemButtons.Regular
-							bgColorClassName={
-								data.hasLiked ? "bg-rcBluePrimary text-white" : ""
-							}
-							onClick={() => {
-								onLike();
-							}}
-						>
-							Likes({data.likes})
-						</SystemButtons.Regular>
+					<div className="flex gap-x-sys-9">
+						{onDelete && (
+							<div>
+								<SystemButtons.Regular
+									onClick={() => {
+										onDelete();
+									}}
+								>
+									Delete
+								</SystemButtons.Regular>
+							</div>
+						)}
+						<div>
+							<SystemButtons.Regular
+								bgColorClassName={
+									data.hasLiked ? "bg-rcBluePrimary text-white" : ""
+								}
+								onClick={() => {
+									onLike();
+								}}
+							>
+								Likes({data.likes})
+							</SystemButtons.Regular>
+						</div>
 					</div>
 				</div>
 

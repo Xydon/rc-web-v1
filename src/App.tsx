@@ -11,12 +11,13 @@ import MyArticles from "./screens/MyArticles/MyArticles";
 import CreatePost from "./screens/CreatePost/CreatePost";
 import PostReviewList from "./screens/PostReviewList/PostReviewList";
 import CommunityPosts from "./screens/CommunityPosts/CommunityPosts";
-import MyPosts from "./screens/MyPosts/MyPosts";
+
 import AuthGuard from "./AuthGuard/AuthGuard";
 import ViewArticles from "./screens/ViewArticles/ViewArticles";
 import AllArticles from "./screens/AllArticles/AllArticles";
 import ResearchInterns from "./screens/ResearchInterns/ResearchInterns";
 import ResearchInternSpecification from "./screens/ResearchInternSpecification/ResearchInternSpecification";
+import MyPosts from "./screens/MyPosts/MyPosts";
 
 function App() {
 	return (

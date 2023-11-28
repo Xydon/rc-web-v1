@@ -3,17 +3,38 @@ import Layout from "@src/components/Layout/Layout";
 import Post from "@src/components/Post/Post";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ServerActions from "./actions/ServerActions";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
+import UnAuthPage from "@src/AuthGuard/components/UnAuthPage/UnAuthPage";
 
 function MyPosts() {
+	const [state, setState] = useState<MyPosts.State>({
+		posts: [],
+		loading: {},
+	});
+
+	const serverActions = new ServerActions(state, setState);
+	const { userDetails } = useAuthGuardContext();
+
+	useEffect(() => {
+		if (userDetails) serverActions.fetch(userDetails.id);
+	}, []);
+
+	if (!userDetails) {
+		return <UnAuthPage />;
+	}
+
 	return (
 		<Layout>
-			<ResponsiveContainer>
+			<ResponsiveContainer style={{ marginBottom: 100 }}>
 				<div style={{ marginBottom: 80 }}>
 					<div className="flex gap-y-8 flex-col md:flex-row md:justify-between md:items-center ">
 						<div>
-							<Typography.H2>MyPosts</Typography.H2>
-							<Typography.Body className="text-rcBluePrimary">32 posts</Typography.Body>
+							<Typography.H2>My Posts</Typography.H2>
+							<Typography.Body className="text-rcBluePrimary">
+								{state.posts.length} posts
+							</Typography.Body>
 						</div>
 						<div>
 							<SystemButtons.Regular
@@ -27,9 +48,28 @@ function MyPosts() {
 				</div>
 
 				<div className="flex flex-col gap-5 items-center">
-					{/* <Post maxWidth={650} />
-					<Post maxWidth={650} />
-					<Post maxWidth={650} /> */}
+					{state.posts.map((v, i) => (
+						<Post
+							maxWidth={650}
+							data={v}
+							onComment={(e) => {
+								serverActions.createComment(
+									{ userId: userDetails.id, postId: v.id, content: e },
+									userDetails.name,
+									i
+								);
+							}}
+							onLike={() => {
+								serverActions.likePost(
+									{ userId: userDetails.id, postId: v.id },
+									i
+								);
+							}}
+							onDelete={() => {
+								serverActions.deletePost(v.id);
+							}}
+						/>
+					))}
 				</div>
 			</ResponsiveContainer>
 		</Layout>
