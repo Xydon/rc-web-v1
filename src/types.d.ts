@@ -37,4 +37,23 @@ interface PostData {
 	}[];
 }
 
+interface CommunityArticle {
+	id: string;
+	heading: string;
+	subheading: string;
+	category?: {
+		id: string;
+		name: string;
+	};
+	author: {
+		id: string;
+		name: string;
+		dateOfCreation: string;
+	};
+	meta: {
+		likes: number;
+		comments: number;
+	};
+}
+
 type ArticleReviewStatus = "submitted" | "accepted" | "rejected";

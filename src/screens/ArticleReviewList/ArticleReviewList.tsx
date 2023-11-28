@@ -11,6 +11,8 @@ import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
 import AsyncProcessBoundary from "@src/components/feedback/AsyncProcessBoundary/AsyncProcessBoundary";
 import ErrorBoundary from "@src/components/feedback/ErrorBoundary/ErrorBoundary";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import { useNavigate } from "react-router-dom";
+import UnAuthPage from "@src/AuthGuard/components/UnAuthPage/UnAuthPage";
 
 export interface RIArticleReviewList {}
 
@@ -29,11 +31,14 @@ export default function ArticleReviewList(props: RIArticleReviewList) {
 
 	const actions = new PageActions(state, setState);
 	const heightHandle = useHeight();
-	const userDetails = useAuthGuardContext().userDetails as UserDetails;
+	const userDetails = useAuthGuardContext().userDetails;
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		actions.fetchArticles(userDetails.id);
+		if(userDetails) actions.fetchArticles(userDetails.id);
 	}, []);
+
+	if(!userDetails) return <UnAuthPage/>
 
 	return (
 		<ErrorBoundary
@@ -136,7 +141,9 @@ export default function ArticleReviewList(props: RIArticleReviewList) {
 													heading: v.heading,
 													byLine: v.subheading,
 													category: v.category?.name,
-													onView: () => {},
+													onView: () => {
+														navigate(`/article/view/${v.articleId}`);
+													},
 													onDiscard: () => {
 														actions.deleteArticle(v.articleId);
 													},

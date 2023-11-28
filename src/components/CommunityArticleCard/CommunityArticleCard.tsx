@@ -7,9 +7,12 @@ import React from "react";
 
 interface Props {
 	removeBorder?: boolean;
+	data: CommunityArticle;
 }
 
 function CommunityArticleCard(props: Props) {
+	const { data } = props;
+
 	return (
 		<div
 			className={`rounded  ${
@@ -24,17 +27,17 @@ function CommunityArticleCard(props: Props) {
 					className="font-medium"
 					style={{ marginBottom: 8 }}
 				>
-					Heading
+					{data.heading}
 				</Typography.BodyLarge>
 				<Typography.Body
 					className="text-slate-500"
 					style={{ marginBottom: 24 }}
 				>
-					Boost up your chances of selection by following some simple tips
+					{data.subheading}
 				</Typography.Body>
 				<div className="flex justify-between">
 					<div>
-						<Chip text="category" />
+						<Chip text="no category" />
 					</div>
 					<div>
 						<SystemButtons.Regular>View</SystemButtons.Regular>
@@ -45,17 +48,20 @@ function CommunityArticleCard(props: Props) {
 			<Divider />
 
 			<div className="flex justify-between items-center mt-sys-24">
-				<AuthorAvatar />
+				<AuthorAvatar
+					name={data.author.name}
+					sub={data.author.dateOfCreation}
+				/>
 				<div>
 					<ul>
 						<li className="">
 							<Typography.BodySmall smaller className="text-slate-500">
-								14 Likes
+								{data.meta.likes} Likes
 							</Typography.BodySmall>
 						</li>
 						<li className="">
 							<Typography.BodySmall smaller className="text-slate-500">
-								3 Comments
+								{data.meta.comments} Comments
 							</Typography.BodySmall>
 						</li>
 					</ul>

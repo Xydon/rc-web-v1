@@ -6,7 +6,7 @@ function EnhancedArticleCard() {
 	return (
 		<div className="border border-slate-300 rounded">
 			<div className="mb-sys-9">
-				<CommunityArticleCard removeBorder />
+				{/* <CommunityArticleCard removeBorder /> */}
 			</div>
 			<div className="flex justify-end gap-x-3 px-3 pb-3">
 				<SystemButtons.Regular>Accept</SystemButtons.Regular>

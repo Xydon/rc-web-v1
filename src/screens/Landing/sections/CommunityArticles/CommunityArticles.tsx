@@ -13,11 +13,11 @@ function CommunityArticles() {
 				</Typography.H2>
 			</div>
 			<div className="flex gap-4 flex-wrap" style={{ marginBottom: 56 }}>
+				{/* <CommunityArticleCard />
 				<CommunityArticleCard />
 				<CommunityArticleCard />
 				<CommunityArticleCard />
-				<CommunityArticleCard />
-				<CommunityArticleCard />
+				<CommunityArticleCard /> */}
 			</div>
 
 			<div className="flex justify-end">
