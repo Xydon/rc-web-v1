@@ -113,7 +113,7 @@ function ResearchInterns() {
 
 				<div>
 					<Typography.H3>Intern List Table</Typography.H3>
-					<InternListTable data={dummyData} />
+					<InternListTable data={state.internList} />
 				</div>
 			</ResponsiveContainer>
 		</Layout>

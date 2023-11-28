@@ -5,6 +5,7 @@ namespace CreateInternList {
 		attributes: FieldDataClass;
 		description: FieldDataClass;
 		attachments: {
+      id: string;
 			name: FieldDataClass;
 			value: FieldDataClass;
 		}[];

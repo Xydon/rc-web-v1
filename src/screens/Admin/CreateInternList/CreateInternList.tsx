@@ -8,29 +8,44 @@ import FieldDataClass from "@src/modules/FieldData/FieldDataClass";
 import getFieldColor from "@src/modules/Utils/getFieldColor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonBase } from "@mui/material";
+import { Validators } from "@src/modules/FieldData/FieldData";
+import PageFormActions from "./actions/PageFormActions";
 
 function CreateInternList() {
 	const [state, setState] = useState<CreateInternList.State>({
-		name: new FieldDataClass(""),
-		institution: new FieldDataClass(""),
-		attributes: new FieldDataClass(""),
-		description: new FieldDataClass(""),
+		name: new FieldDataClass("", Validators.validateNull),
+		institution: new FieldDataClass("", Validators.validateNull),
+		attributes: new FieldDataClass("", Validators.validateNull),
+		description: new FieldDataClass("", Validators.validateNull),
 		attachments: [
-			{ name: new FieldDataClass(""), value: new FieldDataClass("") },
+			{
+				id: "1",
+				name: new FieldDataClass("", Validators.validateNull),
+				value: new FieldDataClass("", Validators.validateNull),
+			},
 		],
 		loading: {},
 	});
 
+	const formActions = new PageFormActions(state, setState);
+
 	return (
 		<Layout>
-			<ResponsiveContainer style={{paddingBottom: 200}}>
+			<ResponsiveContainer style={{ paddingBottom: 200 }}>
 				<div className="flex justify-between mb-sys-39">
 					<Typography.H2 className="font-medium">Create Interns</Typography.H2>
-					<SystemButtons.Regular bgColorClassName="bg-black text-white">
+					<SystemButtons.Regular
+						bgColorClassName="bg-black text-white"
+						onClick={() => {
+							if (formActions.validateAll()) {
+								//* submit
+							}
+						}}
+					>
 						Create
 					</SystemButtons.Regular>
 				</div>
-				<div className="w-2/4">
+				<div className="xl:w-2/4">
 					<div className="mb-sys-24">
 						<div className="mb-2 block">
 							<Label htmlFor="post-head" value="Enter Name" />
@@ -40,12 +55,12 @@ function CreateInternList() {
 							id="post-head"
 							color={getFieldColor(state.name, undefined, true)}
 							value={state.name.getValue()}
-							// onChange={(e) => {
-							// 	createPostActions.setHeading(e.target.value);
-							// }}
-							// onBlur={() => {
-							// 	createPostActions.validateHeading();
-							// }}
+							onChange={(e) => {
+								formActions.setName(e.target.value);
+							}}
+							onBlur={() => {
+								formActions.validateName();
+							}}
 							placeholder="My Awesome Post"
 							required
 							type="text"
@@ -53,19 +68,19 @@ function CreateInternList() {
 					</div>
 					<div className="mb-sys-24">
 						<div className="mb-2 block">
-							<Label htmlFor="post-head" value="Enter Institution" />
+							<Label htmlFor="post-head-1" value="Enter Institution" />
 						</div>
 						<TextInput
 							helperText={<>{state.institution.getError()}</>}
-							id="post-head"
+							id="post-head-1"
 							color={getFieldColor(state.institution, undefined, true)}
 							value={state.institution.getValue()}
-							// onChange={(e) => {
-							// 	createPostActions.setHeading(e.target.value);
-							// }}
-							// onBlur={() => {
-							// 	createPostActions.validateHeading();
-							// }}
+							onChange={(e) => {
+								formActions.setInstitution(e.target.value);
+							}}
+							onBlur={() => {
+								formActions.validateInstitution();
+							}}
 							placeholder="My Awesome Post"
 							required
 							type="text"
@@ -74,21 +89,21 @@ function CreateInternList() {
 					<div className="mb-sys-24">
 						<div className="mb-2 block">
 							<Label
-								htmlFor="post-head"
+								htmlFor="post-head-2"
 								value="Enter comma separated Attributes"
 							/>
 						</div>
 						<TextInput
 							helperText={<>{state.attributes.getError()}</>}
-							id="post-head"
+							id="post-head-2"
 							color={getFieldColor(state.attributes, undefined, true)}
 							value={state.attributes.getValue()}
-							// onChange={(e) => {
-							// 	createPostActions.setHeading(e.target.value);
-							// }}
-							// onBlur={() => {
-							// 	createPostActions.validateHeading();
-							// }}
+							onChange={(e) => {
+								formActions.setAttributes(e.target.value);
+							}}
+							onBlur={() => {
+								formActions.validateAttributes();
+							}}
 							placeholder="My Awesome Post"
 							required
 							type="text"
@@ -103,39 +118,36 @@ function CreateInternList() {
 							color={getFieldColor(state.description, undefined, true)}
 							id="post-body"
 							placeholder="An awesome journey begins here...."
-							// onBlur={() => {
-							// 	createPostActions.validateBody();
-							// }}
 							value={state.description.getValue()}
-							// onChange={(e) => {
-							// 	if (state.postBody.hasError()) {
-							// 		createPostActions.validateBody();
-							// 	}
-							// 	createPostActions.setBody(e.target.value);
-							// }}
+							onBlur={() => {
+								formActions.validateDescription();
+							}}
+							onChange={(e) => {
+								formActions.setDescription(e.target.value);
+							}}
 							required
 							rows={8}
 						/>
 					</div>
 					<div className="mb-sys-24">
 						<div className="mb-2 block">
-							<Label htmlFor="post-head" value="Attachments" />
+							<Label htmlFor="post-head-5" value="Attachments" />
 						</div>
 						<div className="mb-sys-15">
 							{state.attachments.map((v) => (
-								<div className="flex gap-x-3 items-center">
+								<div className="flex gap-x-3 items-center" key={v.id}>
 									<div className="basis-1/3">
 										<TextInput
-											// helperText={<>{state.placeholder.getError()}</>}
-											id="post-head"
-											// color={getFieldColor(state.placeholder, undefined, true)}
-											// value={state.placeholder.getValue()}
-											// onChange={(e) => {
-											// 	createPostActions.setHeading(e.target.value);
-											// }}
-											// onBlur={() => {
-											// 	createPostActions.validateHeading();
-											// }}
+											helperText={<>{v.name.getError()}</>}
+											id="post-headsafg"
+											color={getFieldColor(v.name, undefined, true)}
+											value={v.name.getValue()}
+											onChange={(e) => {
+												formActions.setNameOfAttachment(v.id, e.target.value);
+											}}
+											onBlur={() => {
+												formActions.validateAttachments();
+											}}
 											placeholder="My Awesome Post"
 											required
 											type="text"
@@ -143,28 +155,39 @@ function CreateInternList() {
 									</div>
 									<div className="basis-2/3">
 										<TextInput
-											// helperText={<>{state.placeholder.getError()}</>}
-											id="post-head"
-											// color={getFieldColor(state.placeholder, undefined, true)}
-											// value={state.placeholder.getValue()}
-											// onChange={(e) => {
-											// 	createPostActions.setHeading(e.target.value);
-											// }}
-											// onBlur={() => {
-											// 	createPostActions.validateHeading();
-											// }}
+											helperText={<>{v.name.getError()}</>}
+											id="post-head-50"
+											color={getFieldColor(v.name, undefined, true)}
+											value={v.value.getValue()}
+											onChange={(e) => {
+												formActions.setValueOfAttachment(v.id, e.target.value);
+											}}
+											onBlur={() => {
+												formActions.validateAttachments();
+											}}
 											placeholder="My Awesome Post"
 											required
 											type="text"
 										/>
 									</div>
-									<ButtonBase sx={{ padding: 1.618, borderRadius: 20 }}>
+									<ButtonBase
+										sx={{ padding: 1.618, borderRadius: 20 }}
+										onClick={() => {
+											formActions.deleteAttachment(v.id);
+										}}
+									>
 										<DeleteIcon />
 									</ButtonBase>
 								</div>
 							))}
 						</div>
-						<SystemButtons.Regular>Add more</SystemButtons.Regular>
+						<SystemButtons.Regular
+							onClick={() => {
+								formActions.addAttachment();
+							}}
+						>
+							Add more
+						</SystemButtons.Regular>
 					</div>
 				</div>
 			</ResponsiveContainer>

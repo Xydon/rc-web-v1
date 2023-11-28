@@ -30,7 +30,7 @@ function App() {
 					path="/researchInterns/:id"
 					element={<ResearchInternSpecification />}
 				/>
-				<Route path="/researchInterns" element={<ResearchInterns />} />
+				<Route path="/researchInterns" element={<ResearchInterns />} />			
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 				<Route
