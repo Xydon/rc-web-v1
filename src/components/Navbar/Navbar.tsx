@@ -112,10 +112,10 @@ export default function Navbar(props: RINavbar) {
 										animate={{ opacity: 1, y: 0 }}
 									>
 										<ListGroup>
-											<ListGroup.Item>Profile</ListGroup.Item>
-											<ListGroup.Item>Settings</ListGroup.Item>
-											<ListGroup.Item>Messages</ListGroup.Item>
-											<ListGroup.Item>Download</ListGroup.Item>
+											<ListGroup.Item>
+												<Link to={'/researchInterns'}>
+												Intern List</Link>
+											</ListGroup.Item>
 										</ListGroup>
 									</motion.div>
 								}
@@ -160,10 +160,14 @@ export default function Navbar(props: RINavbar) {
 										>
 											<ListGroup>
 												<ListGroup.Item>
-													<Link to={"/admin/articleAction"}>Accept articles</Link>
+													<Link to={"/admin/articleAction"}>
+														Accept articles
+													</Link>
 												</ListGroup.Item>
 												<ListGroup.Item>
-													<Link to={"/admin/createInterns"}>Create Interns</Link>
+													<Link to={"/admin/createInterns"}>
+														Create Interns
+													</Link>
 												</ListGroup.Item>
 											</ListGroup>
 										</motion.div>
