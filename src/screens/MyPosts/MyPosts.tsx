@@ -27,9 +27,9 @@ function MyPosts() {
 				</div>
 
 				<div className="flex flex-col gap-5 items-center">
+					{/* <Post maxWidth={650} />
 					<Post maxWidth={650} />
-					<Post maxWidth={650} />
-					<Post maxWidth={650} />
+					<Post maxWidth={650} /> */}
 				</div>
 			</ResponsiveContainer>
 		</Layout>

@@ -9,7 +9,7 @@ function TopPosts() {
 			<div className="mb-4 md:mb-10">
 				<Typography.H2 className="font-medium">Top Posts</Typography.H2>
 			</div>
-			<Post/>
+			{/* <Post/> */}
 		</ResponsiveContainer>
 	);
 }

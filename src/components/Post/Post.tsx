@@ -15,54 +15,42 @@ import ImageSlideshow from "./components/ImageContainer/ImageContainer";
 
 interface Props {
 	maxWidth?: number;
+	data: PostData;
 }
 
 function Post(props: Props) {
-	const { maxWidth } = props;
+	const { maxWidth, data } = props;
 
 	return (
 		<Container maxWidth={maxWidth}>
 			<PaddingContainer>
 				<ContentContainer>
 					<Typography.BodyLarge className="font-medium mb-2">
-						Heading
+						{data.heading}
 					</Typography.BodyLarge>
-					<Typography.Body>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-						ab incidunt quidem placeat eligendi obcaecati debitis? Ea,
-						reprehenderit aliquam veritatis doloribus alias aut aspernatur
-						dolores totam cumque assumenda minus voluptatem laudantium ab
-						deleniti ullam vel rem consequatur facere quas? Ratione, enim!
-						Deserunt laborum repellat perferendis, quidem fugit at soluta quos
-						dolore quae ducimus velit voluptates possimus excepturi tenetur
-						animi molestiae tempora! At hic vero dolorem inventore ipsa rem sit
-						impedit reprehenderit perspiciatis praesentium error, totam
-						necessitatibus debitis eius aspernatur. Iste, dolorum? Quaerat
-						officia, ex optio eum at velit iusto dolorum autem nobis! Labore
-						beatae maxime expedita facilis ea corrupti voluptatibus?
-					</Typography.Body>
+					<Typography.Body>{data.body}</Typography.Body>
 				</ContentContainer>
 			</PaddingContainer>
 
 			<Divider />
 
 			<div className="overflow-hidden">
-				<ImageSlideshow
-					images={[
-						"https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg",
-						"https://img.freepik.com/premium-photo/sexy-girl-portrait-summer-time-summer-vibes_942478-5863.jpg",
-						"https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?cs=srgb&dl=pexels-pixabay-206359.jpg&fm=jpg",
-					]}
-				/>
+				<ImageSlideshow images={data.images} />
 			</div>
 
 			<Divider />
 
 			<PaddingContainer>
 				<div className="flex justify-between h-fit items-center mb-8">
-					<AuthorAvatar />
+					<AuthorAvatar name={data.user.name} sub={data.createdDate} />
 					<div>
-						<SystemButtons.Regular>Likes(30)</SystemButtons.Regular>
+						<SystemButtons.Regular
+							bgColorClassName={
+								data.hasLiked ? "bg-rcBluePrimary text-white" : ""
+							}
+						>
+							Likes({data.likes})
+						</SystemButtons.Regular>
 					</div>
 				</div>
 
@@ -70,21 +58,19 @@ function Post(props: Props) {
 
 				<ContentContainer maxHeight={200}>
 					<CommentContainer>
-						<CommentBox>
-							<Comment />
-						</CommentBox>
-						<CommentBox>
-							<Comment />
-						</CommentBox>
-						<CommentBox>
-							<Comment />
-						</CommentBox>
-						<CommentBox>
-							<Comment />
-						</CommentBox>
-						<CommentBox>
-							<Comment />
-						</CommentBox>
+						{data.comments.map((v) => (
+							<CommentBox>
+								<Comment
+									data={{
+										userId: v.userId,
+										id: v.id,
+										postedOn: v.creationDate,
+										content: v.commentText,
+										userName: v.userName,
+									}}
+								/>
+							</CommentBox>
+						))}
 					</CommentContainer>
 				</ContentContainer>
 			</PaddingContainer>

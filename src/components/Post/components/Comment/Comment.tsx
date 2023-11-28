@@ -5,28 +5,34 @@ import CommentAvatar from "./components/CommentAvatar/CommentAvatar";
 import { Avatar } from "@mui/material";
 
 interface Commentformat {
-	
+	id: string;
+	userName: string;
+	userId: string;
+	postedOn: string;
+	content: string;
 }
 
-function Comment() {
+function Comment(props: { data: Commentformat }) {
+	const { data } = props;
+
 	return (
 		<div className="flex items-start gap-x-4 pr-3">
 			<Avatar />
 			<div className="grow">
 				<div
-					className="flex items-start justify-between"
+					className="flex items-start justify-between mb-2"
 					style={{ columnGap: "0%" }}
 				>
 					<CommentAvatar
-						userName={''}
-						userId={''}
-						postedOn={''}
+						userName={data.userName}
+						userId={data.userId}
+						postedOn={data.postedOn}
 					/>
 					{/* <LikeButton /> */}
 				</div>
 				<div style={{ width: "80%" }}>
 					<Typography.BodySmall className="font-light">
-						{/* {data.} */}
+						{data.content}
 					</Typography.BodySmall>
 				</div>
 			</div>

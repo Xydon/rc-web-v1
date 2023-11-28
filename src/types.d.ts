@@ -19,12 +19,19 @@ interface UserDetails {
 interface PostData {
 	id: string;
 	heading: string;
-	subHeading: string;
+	body : string;
 	images: string[];
 	likes: number;
 	hasLiked: boolean;
+	createdDate: string;
+	user : {
+		name: string; 
+		id: string; 
+	}
 	comments: {
+		id: string;
 		userId: string;
+		userName: string; 
 		creationDate: string;
 		commentText: string;
 	}[];
