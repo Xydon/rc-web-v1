@@ -6,6 +6,7 @@ import Typography from "@src/components/Typography";
 import { TextInput } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import ServerActions from "./actions/ServerActions";
+import { useNavigate } from "react-router-dom";
 
 function AllArticles() {
 	const [state, setState] = useState<AllArticles.State>({
@@ -14,6 +15,7 @@ function AllArticles() {
 	});
 
 	const actions = new ServerActions(state, setState);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		actions.fetch();
@@ -45,7 +47,12 @@ function AllArticles() {
 
 				<div className="flex gap-4 flex-wrap" style={{ marginBottom: 56 }}>
 					{state.articles.map((v) => (
-						<CommunityArticleCard data={v} />
+						<CommunityArticleCard
+							onView={() => {
+								navigate("/article/view/" + v.id);
+							}}
+							data={v}
+						/>
 					))}
 				</div>
 			</ResponsiveContainer>

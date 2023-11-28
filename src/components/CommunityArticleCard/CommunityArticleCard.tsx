@@ -8,10 +8,11 @@ import React from "react";
 interface Props {
 	removeBorder?: boolean;
 	data: CommunityArticle;
+	onView?: () => void;
 }
 
 function CommunityArticleCard(props: Props) {
-	const { data } = props;
+	const { data, onView } = props;
 
 	return (
 		<div
@@ -40,7 +41,13 @@ function CommunityArticleCard(props: Props) {
 						<Chip text="no category" />
 					</div>
 					<div>
-						<SystemButtons.Regular>View</SystemButtons.Regular>
+						<SystemButtons.Regular
+							onClick={() => {
+								onView && onView();
+							}}
+						>
+							View
+						</SystemButtons.Regular>
 					</div>
 				</div>
 			</div>
