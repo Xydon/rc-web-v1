@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Container from "./components/Container/Container";
 import ContentContainer from "./components/ContentContainer/ContentContainer";
 import Typography from "../Typography";
 import Divider from "./components/Divider/Divider";
-import ImageContainer from "./components/ImageContainer/ImageContainer";
 import PaddingContainer from "./components/PaddingContainer/PaddingContainer";
 import AuthorAvatar from "../Avatars/AuthorAvatar/AuthorAvatar";
 import SystemButtons from "../Buttons/System/SystemButtons";
@@ -16,10 +15,14 @@ import ImageSlideshow from "./components/ImageContainer/ImageContainer";
 interface Props {
 	maxWidth?: number;
 	data: PostData;
+	onLike?: () => void;
+	onComment?: (e: string) => void;
 }
 
 function Post(props: Props) {
-	const { maxWidth, data } = props;
+	const { maxWidth, data, onLike = () => {}, onComment = (e) => {} } = props;
+
+	const [state, setState] = useState("");
 
 	return (
 		<Container maxWidth={maxWidth}>
@@ -48,13 +51,29 @@ function Post(props: Props) {
 							bgColorClassName={
 								data.hasLiked ? "bg-rcBluePrimary text-white" : ""
 							}
+							onClick={() => {
+								onLike();
+							}}
 						>
 							Likes({data.likes})
 						</SystemButtons.Regular>
 					</div>
 				</div>
 
-				<CommentInput />
+				<div className="flex gap-x-2">
+					<div className="grow">
+						<CommentInput
+							value={state}
+							onChange={(e) => {
+								setState(e.target.value);
+							}}
+							onEnter={() => {
+								onComment(state);
+								setState("");
+							}}
+						/>
+					</div>
+				</div>
 
 				<ContentContainer maxHeight={200}>
 					<CommentContainer>

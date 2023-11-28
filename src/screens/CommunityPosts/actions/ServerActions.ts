@@ -24,7 +24,7 @@ export default class ServerActions extends ServerStateUtils<CommunityPosts.State
 						id: nanoid(),
 						commentText: props.content,
 						creationDate: getTodayDate(),
-						userName: ''
+						userName: userName
 					});
 				});
 			},

@@ -48,8 +48,24 @@ function CommunityPosts() {
 				</div>
 
 				<div className="flex flex-col gap-5 items-center">
-					{state.posts.map((v) => (
-						<Post maxWidth={650} data={v} />
+					{state.posts.map((v, i) => (
+						<Post
+							maxWidth={650}
+							data={v}
+							onComment={(e) => {
+								serverActions.createComment(
+									{ userId: userDetails.id, postId: v.id, content: e },
+									userDetails.name,
+									i
+								);
+							}}
+							onLike={() => {
+								serverActions.likePost(
+									{ userId: userDetails.id, postId: v.id },
+									i
+								);
+							}}
+						/>
 					))}
 				</div>
 			</ResponsiveContainer>
