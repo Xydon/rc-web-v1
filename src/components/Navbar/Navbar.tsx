@@ -6,6 +6,8 @@ import { ListGroup } from "flowbite-react";
 import { motion } from "framer-motion";
 import { Card } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useAuthGuardContext } from "@src/AuthGuard/AuthGuard";
+import AuthorAvatar from "../Avatars/AuthorAvatar/AuthorAvatar";
 
 export interface RINavbar {}
 
@@ -22,6 +24,8 @@ export default function Navbar(props: RINavbar) {
 	// 	window.addEventListener("scroll", handler);
 	// 	return () => window.removeEventListener("scroll", handler);
 	// }, []);
+
+	const { userDetails } = useAuthGuardContext();
 
 	return (
 		<>
@@ -144,30 +148,65 @@ export default function Navbar(props: RINavbar) {
 								}
 							/>
 						</div>
+						{userDetails && userDetails.role === "admin" && (
+							<div className="cursor-pointer px-3">
+								<DropDown
+									text={"admin"}
+									DropDownNode={
+										<motion.div
+											style={{ width: 160 }}
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+										>
+											<ListGroup>
+												<ListGroup.Item>
+													<Link to={"/post/community"}>Accept articles</Link>
+												</ListGroup.Item>
+												<ListGroup.Item>
+													<Link to={"/post/myPosts"}>Create Interns</Link>
+												</ListGroup.Item>
+											</ListGroup>
+										</motion.div>
+									}
+								/>
+							</div>
+						)}
 					</div>
 
-					<div className="flex">
-						<div className="mr-3">
-							<Link to={"/signup"}>
-								<button
-									style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
-									className="bg-rcBlue text-white font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
-								>
-									Sign up
-								</button>
-							</Link>
+					{!userDetails && (
+						<div className="flex">
+							<div className="mr-3">
+								<Link to={"/signup"}>
+									<button
+										style={{
+											padding: "8px 24px",
+											borderRadius: 6,
+											fontSize: 14,
+										}}
+										className="bg-rcBlue text-white font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
+									>
+										Sign up
+									</button>
+								</Link>
+							</div>
+							<div>
+								<Link to={"/login"}>
+									<button
+										style={{
+											padding: "8px 24px",
+											borderRadius: 6,
+											fontSize: 14,
+										}}
+										className=" text-slate-800 border border-slate-300 font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
+									>
+										Login
+									</button>
+								</Link>
+							</div>
 						</div>
-						<div>
-							<Link to={"/login"}>
-								<button
-									style={{ padding: "8px 24px", borderRadius: 6, fontSize: 14 }}
-									className=" text-slate-800 border border-slate-300 font-medium active:scale-95 active:brightness-100 hover:brightness-105 transition-all"
-								>
-									Login
-								</button>
-							</Link>
-						</div>
-					</div>
+					)}
+
+					{userDetails && <AuthorAvatar name={userDetails.name} />}
 				</div>
 			</div>
 		</>

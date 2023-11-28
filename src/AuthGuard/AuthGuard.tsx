@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthActions from "./actions/AuthActions";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
+import UnAuthPage from "./components/UnAuthPage/UnAuthPage";
 
 interface Props {
 	children?: React.ReactNode;
@@ -34,7 +35,7 @@ function AuthGuard(props: Props) {
 		authActions.isLoggedIn();
 	}, []);
 
-	if (state.loading.isLoggedIn.status === "success")
+	if (state.loading.isLoggedIn.status !== "initialized")
 		return (
 			<AuthContext.Provider
 				value={{
@@ -51,7 +52,7 @@ function AuthGuard(props: Props) {
 				{children}
 			</AuthContext.Provider>
 		);
-	return <></>;
+	return <UnAuthPage />;
 }
 
 export default AuthGuard;
