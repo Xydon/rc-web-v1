@@ -1,3 +1,6 @@
+import { CreateInternInstance } from "@src/screens/Admin/CreateInternList/fetch/instance";
+import {api} from "../api"
+import { getInternInstance } from "../instance";
 interface ResearchInternData {
 	id: string;
 	name: string;
@@ -12,4 +15,10 @@ interface ResearchInternData {
 	isActive: boolean;
 }
 
-export default async function getInternListService() {}
+export default async function getInternListService() {
+	return await getInternInstance<ResearchInternData[]>(api.getInternListing)
+}
+
+export async function getInternInfo(id:string){
+	return await getInternInstance<ResearchInternData>(api.getInternInfo(id))
+}

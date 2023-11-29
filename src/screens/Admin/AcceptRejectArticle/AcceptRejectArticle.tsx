@@ -4,10 +4,23 @@ import Layout from "@src/components/Layout/Layout";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import { TextInput } from "flowbite-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Validators } from "@src/modules/FieldData/FieldData"
 import EnhancedArticleCard from "./components/EnhancedArticleCard/EnhancedArticleCard";
+import ServerActions from "./actions/ServerActions";
 
 function AcceptRejectArticle() {
+
+	const [state,setState] = useState<AdminArticlesList.State>({
+		articles:[],
+		loading: {},
+	})
+
+	const serverUtils =  new ServerActions(state,setState)
+	useEffect(() => {
+		serverUtils.getArticleList()
+	},[]);
+	
 	return (
 		<Layout>
 			<ResponsiveContainer>
@@ -34,9 +47,9 @@ function AcceptRejectArticle() {
 				</div>
 
 				<div className="flex gap-4 flex-wrap" style={{ marginBottom: 56 }}>
-					<EnhancedArticleCard />
-					<EnhancedArticleCard />
-					<EnhancedArticleCard />
+					{
+						state.articles.map((v)=>(<EnhancedArticleCard {...v}  />))
+					}
 				</div>
 			</ResponsiveContainer>
 		</Layout>

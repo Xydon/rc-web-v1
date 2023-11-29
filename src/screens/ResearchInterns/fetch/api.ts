@@ -1,1 +1,4 @@
-export const apiIndex = {};
+export const api = {
+  getInternListing:"getAllIntenListing",
+  getInternInfo:(id:string)=>`getInternInfo/${id}`
+};

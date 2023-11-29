@@ -10,6 +10,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ButtonBase } from "@mui/material";
 import { Validators } from "@src/modules/FieldData/FieldData";
 import PageFormActions from "./actions/PageFormActions";
+import SubmitFormActions from "./actions/SubmitFormActions";
+import { start } from "repl";
 
 function CreateInternList() {
 	const [state, setState] = useState<CreateInternList.State>({
@@ -28,6 +30,7 @@ function CreateInternList() {
 	});
 
 	const formActions = new PageFormActions(state, setState);
+	const submitActions = new SubmitFormActions(state,setState)
 
 	return (
 		<Layout>
@@ -38,7 +41,7 @@ function CreateInternList() {
 						bgColorClassName="bg-black text-white"
 						onClick={() => {
 							if (formActions.validateAll()) {
-								//* submit
+								submitActions.submitInternForm()
 							}
 						}}
 					>

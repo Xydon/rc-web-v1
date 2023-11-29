@@ -3,11 +3,12 @@ import Layout from "@src/components/Layout/Layout";
 import ResponsiveContainer from "@src/components/ResponsiveContainer/ResponsiveContainer";
 import Typography from "@src/components/Typography";
 import { TextInput } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AttributeChip from "./components/AttributeChip/AttributeChip";
 import InternListTable from "./components/InternListTable/InternListTable";
 import Divider from "@src/components/ArticleCards/Base/Divider/Divider";
 import ServerActions from "./actions/ServerActions";
+import ServerStateActions from "./fetch/actions/serverActions";
 
 const dummyData = [
 	{
@@ -79,9 +80,14 @@ function ResearchInterns() {
 		query: "",
 	});
 
-  //* use to set in the interns and fetch them
-  const actions = new ServerActions(state, setState); 
+	
 
+  //* use to set in the interns and fetch them
+  const actions = new ServerStateActions(state, setState); 
+	useEffect(() => {
+		actions.getAllInternListing()
+	}, [])
+	
 	return (
 		<Layout>
 			<ResponsiveContainer style={{ paddingBottom: 200 }}>
